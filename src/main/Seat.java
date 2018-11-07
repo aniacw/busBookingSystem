@@ -1,3 +1,5 @@
+package main;
+
 public class Seat {
 
     private int seatNumber;

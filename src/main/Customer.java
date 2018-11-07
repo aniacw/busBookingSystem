@@ -1,3 +1,5 @@
+package main;
+
 public class Customer extends User {
 
     public Customer(String login, String password) {

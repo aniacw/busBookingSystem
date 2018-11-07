@@ -1,3 +1,5 @@
+package main;
+
 public class Ticket {
 
     Reservation reservation;
