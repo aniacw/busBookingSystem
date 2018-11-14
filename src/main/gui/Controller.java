@@ -99,6 +99,22 @@ public class Controller {
     @FXML
     TableView busManagementTable;
 
+    @FXML
+    Button addBusButton;
 
+    @FXML
+    Button removeBusButton;
+
+    @FXML
+    Button fetchDataButton;
+
+    @FXML
+    Button updateDataButton;
+
+
+
+    public void onButtonAddBusClicked(){
+        //Main.getInstance().getLoggedUser()
+    }
 
 }

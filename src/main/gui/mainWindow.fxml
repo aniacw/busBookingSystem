@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -29,7 +29,7 @@
    <children>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
         <tabs>
-          <Tab fx:id="busManagement" text="main.Bus Management">
+          <Tab fx:id="busManagement" text="Bus Management">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -55,8 +55,8 @@
                                  <children>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="2">
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Add main.Bus" />
-                                          <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Remove main.Bus" />
+                                          <Button fx:id="addBusButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="124.0" text="Add Bus" />
+                                          <Button fx:id="removeBusButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="124.0" text="Remove Bus" />
                                        </children>
                                        <padding>
                                           <Insets left="10.0" top="15.0" />
@@ -64,8 +64,8 @@
                                     </HBox>
                                     <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Fetch Data" />
-                                          <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Update Data" />
+                                          <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="124.0" text="Fetch Data" />
+                                          <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="124.0" text="Update Data" />
                                        </children>
                                        <padding>
                                           <Insets left="10.0" top="15.0" />
@@ -73,12 +73,12 @@
                                     </HBox>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Label text="main.Bus ID">
+                                          <Label fx:id="busIdLabel" text="Bus ID">
                                              <VBox.margin>
                                                 <Insets top="20.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <Label text="main.Bus Name">
+                                          <Label fx:id="busNameLabel" prefHeight="21.0" prefWidth="77.0" text="Bus Name">
                                              <VBox.margin>
                                                 <Insets top="10.0" />
                                              </VBox.margin>
@@ -87,12 +87,12 @@
                                     </VBox>
                                     <VBox GridPane.columnIndex="1">
                                        <children>
-                                          <TextField prefHeight="25.0" prefWidth="233.0">
+                                          <TextField fx:id="busId" prefHeight="25.0" prefWidth="233.0">
                                              <VBox.margin>
                                                 <Insets top="15.0" />
                                              </VBox.margin>
                                           </TextField>
-                                          <TextField prefHeight="25.0" prefWidth="199.0">
+                                          <TextField fx:id="busName" prefHeight="25.0" prefWidth="199.0">
                                              <VBox.margin>
                                                 <Insets top="5.0" />
                                              </VBox.margin>
@@ -123,8 +123,8 @@
                                           <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <TextField GridPane.rowIndex="1" />
-                                          <TextField prefWidth="20.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField fx:id="hh" GridPane.rowIndex="1" />
+                                          <TextField fx:id="mm" prefWidth="20.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
                                                 <CheckBox mnemonicParsing="false">
@@ -157,8 +157,8 @@
                               </GridPane>
                               <TableView fx:id="busManagementTable" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                 <columns>
-                                  <TableColumn prefWidth="215.0" text="main.Bus ID" />
-                                  <TableColumn prefWidth="215.0" text="main.Bus Name" />
+                                  <TableColumn prefWidth="215.0" text="Bus ID" />
+                                  <TableColumn prefWidth="215.0" text="Bus Name" />
                                     <TableColumn prefWidth="215.0" text="Originated From" />
                                     <TableColumn prefWidth="213.0" text="Timing Form Source" />
                                 </columns>
@@ -168,7 +168,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-          <Tab fx:id="reservation" text="main.Reservation">
+          <Tab fx:id="reservation" text="Reservation">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="423.0" prefWidth="748.0">
                      <children>
@@ -294,7 +294,7 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="423.0" prefWidth="748.0" />
                </content>
             </Tab>
-            <Tab fx:id="adminPanel" text="main.Admin Panel">
+            <Tab fx:id="adminPanel" text="Admin Panel">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="423.0" prefWidth="748.0" />
                </content>

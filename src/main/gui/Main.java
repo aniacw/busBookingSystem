@@ -2,18 +2,32 @@ package main.gui;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import main.DataBaseManager;
 import main.LoginManager;
+import main.User;
+import main.db.CSVLoader;
 
 import java.util.Optional;
 
 public class Main extends Application {
+
+    private User loggedUser;
+    private static Main instance = null;
+
+    public static Main getInstance(){return instance;}
+
+    public User getLoggedUser() {
+        return loggedUser;
+    }
 
     private Pair<String, String> loginDialog(){
         Dialog<Pair<String, String>> dialog = new Dialog<>();
@@ -21,12 +35,8 @@ public class Main extends Application {
         dialog.setHeaderText("Look, a Custom Login Dialog");
 
 
-// Set the icon (must be included in the project).
-        //dialog.setGraphic(new ImageView(this.getClass().getResource("login.png").toString()));
-
 // Set the button types.
-        ButtonType loginButtonType = new ButtonType("Login", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
 // Create the username and password labels and fields.
         GridPane grid = new GridPane();
@@ -45,7 +55,7 @@ public class Main extends Application {
         grid.add(password, 1, 1);
 
 //// Enable/Disable login button depending on whether a username was entered.
-        Node loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
+        Node loginButton = dialog.getDialogPane().lookupButton(ButtonType.OK);
         loginButton.setDisable(true);
 //
 //// Do some validation (using the Java 8 lambda syntax).
@@ -59,25 +69,39 @@ public class Main extends Application {
 
 
         dialog.getDialogPane().setContent(grid);
+        dialog.setResultConverter(
+                buttonType ->
+                        buttonType == ButtonType.OK ?
+                                new Pair<String,String>(username.getText(), password.getText())
+                                : null);
 
 // Request focus on the username field by default.
         Platform.runLater(() -> username.requestFocus());
 
 // Convert the result to a username-password-pair when the login button is clicked.
         Optional<Pair<String, String>> result = dialog.showAndWait();
-        Pair<String, String> loginData = result.get();
-        return loginData;
+        if (result.isPresent())
+            return result.get();
+        else
+            return null;
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        instance = this;
        Pair<String,String> loginData = loginDialog();
-       System.out.println("Username=" + loginData.getKey() + ", Password=" + loginData.getValue());
+       if (loginData == null)
+           System.out.printf("canceled");
+       else
+           System.out.println("Username=" + loginData.getKey() + ", Password=" + loginData.getValue());
 
        DataBaseManager manager = new DataBaseManager();
-       manager.connect("busschedules", "root", "");
+       manager.connect("busschedule", "root", "123456");
        LoginManager loginManager = new LoginManager(manager);
-       manager.insertIntoTable("routes", 1, "W", "L", 3344, 45);
+       CSVLoader csvLoader = new CSVLoader(manager);
+       csvLoader.loadIntoTable("C:\\Users\\Ania\\Desktop\\BUS.csv","USERS");
+
+      // manager.insertIntoTable("routes", 1, "W", "L", 3344, 45);
 
 //
 //        Statement stmt = null;

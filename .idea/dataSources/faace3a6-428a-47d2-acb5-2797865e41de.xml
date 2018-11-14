@@ -1106,64 +1106,88 @@
     </collation>
     <table id="277" parent="2" name="departures"/>
     <table id="278" parent="2" name="routes"/>
-    <column id="279" parent="277" name="departure_id">
+    <table id="279" parent="2" name="users"/>
+    <column id="280" parent="277" name="departure_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="280" parent="277" name="route_id">
+    <column id="281" parent="277" name="route_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="281" parent="277" name="departure_time">
+    <column id="282" parent="277" name="departure_time">
       <Position>3</Position>
       <DataType>timestamp|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="282" parent="277" name="PRIMARY">
+    <key id="283" parent="277" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>departure_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="283" parent="278" name="route_id">
+    <column id="284" parent="278" name="route_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="284" parent="278" name="departure">
+    <column id="285" parent="278" name="departure">
       <Position>2</Position>
-      <DataType>char(1)|0s</DataType>
+      <DataType>varchar(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="285" parent="278" name="destination">
+    <column id="286" parent="278" name="destination">
       <Position>3</Position>
-      <DataType>char(1)|0s</DataType>
+      <DataType>varchar(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="286" parent="278" name="distance">
+    <column id="287" parent="278" name="distance">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="287" parent="278" name="bus_no">
+    <column id="288" parent="278" name="bus_no">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="288" parent="278" name="PRIMARY">
+    <key id="289" parent="278" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>route_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="290" parent="279" name="login">
+      <Position>1</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="291" parent="279" name="user_password">
+      <Position>2</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="292" parent="279" name="access">
+      <Position>3</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="293" parent="279" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>login</ColNames>
       <Primary>1</Primary>
     </key>
   </database-model>
