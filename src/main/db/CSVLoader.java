@@ -1,12 +1,7 @@
 package main.db;
 
-import com.sun.xml.internal.fastinfoset.util.StringArray;
-import main.DataBaseManager;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -19,7 +14,7 @@ public class CSVLoader {
 
     public void loadIntoTable(String filename, String tableName) throws SQLException, FileNotFoundException {
         FileInputStream stream = new FileInputStream(filename);
-        Scanner scanner=new Scanner(stream);
+        Scanner scanner = new Scanner(stream);
         String header = scanner.nextLine();
         while (scanner.hasNext()) {
             String line = scanner.nextLine();

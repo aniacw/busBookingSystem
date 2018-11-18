@@ -1,5 +1,4 @@
-package main;
-
+package main.db;
 
 import java.sql.*;
 
@@ -24,9 +23,14 @@ public class DataBaseManager {
             return true;
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     public void insertObjectsIntoTable(String tableName, Object... values) throws SQLException {
         StringBuilder builder = new StringBuilder();
         builder.append("INSERT INTO " + tableName + " VALUES (");
+
         if (values.length > 0) {
             builder.append(values[0]);
             for (int i = 1; i < values.length; ++i) {
@@ -34,19 +38,20 @@ public class DataBaseManager {
                 builder.append(',');
                 if (v instanceof String) {
                     builder.append('\'');
-                    builder.append(values[i]);
+                    builder.append(values[i]); //*******
                     builder.append('\'');
                 } else {
                     builder.append(values[i]);
                 }
             }
         }
+
         builder.append(")");
         statement.executeUpdate(builder.toString());
     }
 
     public void insertValuesIntoTable(String tableName, String columnOrder, String row) throws SQLException {
-        StringBuilder builder=new StringBuilder(25+tableName.length()+columnOrder.length() + row.length());
+        StringBuilder builder = new StringBuilder(25 + tableName.length() + columnOrder.length() + row.length());
         builder
                 .append("INSERT INTO ")
                 .append(tableName)
@@ -65,8 +70,5 @@ public class DataBaseManager {
         return connection != null;
     }
 
-    public void loadDataFromFile(String filename) throws SQLException {
-        StringBuilder builder = new StringBuilder();
 
-    }
 }
