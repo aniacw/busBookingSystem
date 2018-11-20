@@ -1,8 +1,15 @@
 package main.gui;
 
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import main.db.DataBaseManager;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Controller {
 
@@ -28,7 +35,38 @@ public class Controller {
     Label destiantion;
 
     @FXML
-    ComboBox departureList;
+    ComboBox departureList; // = getDepartureList();
+
+
+    public ComboBox getDepartureList(ComboBox comboBox) {
+        try {
+            statement = manager.getConnection().createStatement();
+            StringBuilder getDepartureListQuery = new StringBuilder();
+            getDepartureListQuery
+                    .append("SELECT departure FROM routes");
+            ResultSet resultSet = statement.executeQuery(getDepartureListQuery.toString());
+
+            int index = 0;
+            while (resultSet.next()) {
+                comboBox.getItems().add(resultSet.getString(index));
+                index++;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return comboBox;
+    }
+
+    @FXML
+    public void initialize(){
+
+
+        getDepartureList(departureList);
+
+    }
+
+
 
     @FXML
     ComboBox destinationList;
@@ -73,18 +111,6 @@ public class Controller {
     Label selectBusLabel;
 
     @FXML
-    Label busIdLabel;
-
-    @FXML
-    Label busNameLabel;
-
-    @FXML
-    TextField busId;
-
-    @FXML
-    TextField busName;
-
-    @FXML
     Label originLabel;
 
     @FXML
@@ -111,10 +137,57 @@ public class Controller {
     @FXML
     Button updateDataButton;
 
+    @FXML
+    TextField departureId;
+
+    @FXML
+    TextField routeId;
+
+    @FXML
+    TextField date;
 
 
-    public void onButtonAddBusClicked(){
-        //Main.getInstance().getLoggedUser()
+    private Statement statement;
+    private DataBaseManager manager;
+
+    public void onButtonAddBusClicked() {
+        try {
+            statement = manager.getConnection().createStatement();
+            StringBuilder addBusQuery = new StringBuilder();
+            addBusQuery
+                    .append("INSERT INTO departures (departure_id, route_id, departure_time) VALUES (")
+                    .append(departureId.getText())
+                    .append(",")
+                    .append(routeId.getText())
+                    .append(",")
+                    .append(date.getText())
+                    .append(")");
+
+            ResultSet resultSet = statement.executeQuery(addBusQuery.toString());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+    public void onButtonRemoveBusClicked() {
+        try {
+            statement = manager.getConnection().createStatement();
+
+            StringBuilder removeBusQuery = new StringBuilder();
+            removeBusQuery
+                    .append("DELETE FROM departures WHERE departure_id = ")
+                    .append(departureId.getText())
+                    .append("AND WHERE route_id = ")
+                    .append(routeId.getText())
+                    .append("AND WHERE departure_time = ")
+                    .append(date.getText());
+
+            ResultSet resultSet = statement.executeQuery(removeBusQuery.toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

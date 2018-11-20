@@ -101,7 +101,7 @@ public class LoginManager {
 
         StringBuilder userPasswordCheck = new StringBuilder();
         userPasswordCheck
-                .append("SELECT user_password FROM users WHERE login IN (' ")
+                .append("SELECT user_password FROM users WHERE login IN ('")
                 .append(userName)
                 .append("')");
 
@@ -116,8 +116,20 @@ public class LoginManager {
 
             statement = manager.getConnection().createStatement();
             ResultSet resultSet1 = statement.executeQuery(userPasswordCheck.toString());
-            if (resultSet1.equals(password))
-                return true;
+            if (resultSet1.equals(password)) {
+                StringBuilder accessType = new StringBuilder();
+                accessType
+                        .append("SELECT access FROM users WHERE login IN ('")
+                        .append(userName)
+                        .append("')");
+                ResultSet resultSet2 = statement.executeQuery(accessType.toString());
+
+                if (resultSet2.equals("admin"))
+                    loggedUser = new Admin();
+                else if (resultSet2.equals("client"))
+                    loggedUser = new Customer();
+            }
+            return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
