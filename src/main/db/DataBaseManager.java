@@ -1,6 +1,11 @@
 package main.db;
 
+import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class DataBaseManager {
     private Connection connection;
@@ -62,6 +67,65 @@ public class DataBaseManager {
                 .append(row)
                 .append(')');
         statement.executeUpdate(builder.toString());
+    }
+
+    public Data getColumnFromTable(String column, String table) throws SQLException {
+        StringBuilder getData = new StringBuilder();
+        getData
+                .append("SELECT ")
+                .append(column)
+                .append(" FROM ")
+                .append(table);
+        return new Data(statement.executeQuery(getData.toString()));
+    }
+
+
+    public Data selectWhereColumnEquals(String table, String column, String value) throws SQLException {
+        StringBuilder getData = new StringBuilder();
+        getData
+                .append("SELECT * FROM ")
+                .append(table)
+                .append(" WHERE ")
+                .append(column)
+                .append(" = ")
+                .append(value);
+        return new Data(statement.executeQuery(getData.toString()));
+    }
+
+    public Data selectWhereColumnEqualsString(String table, String column, String value) throws SQLException {
+        return selectWhereColumnEquals(table, column, "'"+value+"'");
+    }
+
+
+    public Data getTable(String table) throws SQLException {
+        StringBuilder getData = new StringBuilder();
+        getData
+                .append("SELECT * FROM ")
+                .append(table);
+        return new Data(statement.executeQuery(getData.toString()));
+    }
+
+    //nie wiem czy mi to potrzebne
+    public ArrayList getValuesFromTable(String column, String table) {
+        ArrayList arrayList = new ArrayList();
+        try {
+            statement = connection.createStatement();
+            StringBuilder getValuesQuery = new StringBuilder();
+            getValuesQuery
+                    .append("SELECT ")
+                    .append(column)
+                    .append(" FROM ")
+                    .append(table);
+            ResultSet resultSet = statement.executeQuery(getValuesQuery.toString());
+
+            while (resultSet.next()) {
+                arrayList.addAll((Collection) resultSet);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return arrayList;
     }
 
     //"select * from users where login = '...' "

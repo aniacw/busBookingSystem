@@ -4,6 +4,7 @@ public class User {
 
     private String login;
     private String password;
+    //access i wszystko z tym zwiazane
 
     public User(String login, String password) {
         this.login = login;
@@ -12,4 +13,6 @@ public class User {
 
     public User() {
     }
+
+
 }

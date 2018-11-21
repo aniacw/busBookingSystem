@@ -6,8 +6,8 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
+import main.db.Data;
 import main.db.DataBaseManager;
-import main.gui.Main;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,17 +27,12 @@ public class LoginManager {
     }
 
     private User loggedUser;
-    private static Main instance = null;
-
-    public static Main getInstance() {
-        return instance;
-    }
 
     public User getLoggedUser() {
         return loggedUser;
     }
 
-    public Pair<String, String> loginDialog() {
+    public boolean loginDialog() {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("System login");
         dialog.setHeaderText("Please type in your login and password");
@@ -76,7 +71,6 @@ public class LoginManager {
         });
 
 //sprawdzanie danych usera
-        verifyCredentials(username.getText(), password.getText());
 
 
         dialog.getDialogPane().setContent(grid);
@@ -91,62 +85,93 @@ public class LoginManager {
 
 // Convert the result to a username-password-pair when the login button is clicked.
         Optional<Pair<String, String>> result = dialog.showAndWait();
-        if (result.isPresent())
-            return result.get();
+        if (result.isPresent()){
+            Pair<String, String> resultData = result.get();
+            loggedUser = null;
+            return verifyCredentials(resultData.getKey(), resultData.getValue());
+        }
         else
-            return null;
+            return true;
     }
 
     public boolean verifyCredentials(String userName, String password) {
 
-        StringBuilder userPasswordCheck = new StringBuilder();
-        userPasswordCheck
-                .append("SELECT user_password FROM users WHERE login IN ('")
-                .append(userName)
-                .append("')");
-
         try {
-            // statement = manager.getConnection().createStatement();
-//            ResultSet resultSet = statement.executeQuery(userNameCheck.toString());
-//            if (resultSet.absolute(1)) {
-//                StringBuilder passwordCheck = new StringBuilder();
-//                passwordCheck
-//                        .append("SELECT user_password FROM users WHERE login = ")
-//                        .append(password);
-
-            statement = manager.getConnection().createStatement();
-            ResultSet resultSet1 = statement.executeQuery(userPasswordCheck.toString());
-            if (resultSet1.equals(password)) {
-                StringBuilder accessType = new StringBuilder();
-                accessType
-                        .append("SELECT access FROM users WHERE login IN ('")
-                        .append(userName)
-                        .append("')");
-                ResultSet resultSet2 = statement.executeQuery(accessType.toString());
-
-                if (resultSet2.equals("admin"))
-                    loggedUser = new Admin();
-                else if (resultSet2.equals("client"))
-                    loggedUser = new Customer();
+            Data data = manager.selectWhereColumnEqualsString("users", "login", userName);
+            if (data.isEmpty())
+                return false;
+            String dbPassword = data.getFromTopRow(3);
+            String dbAccess = data.getFromTopRow(4);
+            if (dbPassword.equals(password)){
+                if (dbAccess.equals("admin")){
+                    loggedUser = new Admin(userName, password);
+                    return true;
+                }
+                else if (dbAccess.equals("client")) {
+                    loggedUser = new Client(userName, password);
+                    return true;
+                }
+                else
+                    return false; //wyrzucic jakis sensowny wyjatek (?)
             }
-            return true;
-
+            else
+                return false;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
+
+//        StringBuilder userPasswordCheck = new StringBuilder();
+//        userPasswordCheck
+//                .append("SELECT user_password FROM users WHERE login = '")
+//                .append(userName)
+//                .append("'");
+//
+//        try {
+//            // statement = manager.getConnection().createStatement();
+////            ResultSet resultSet = statement.executeQuery(userNameCheck.toString());
+////            if (resultSet.absolute(1)) {
+////                StringBuilder passwordCheck = new StringBuilder();
+////                passwordCheck
+////                        .append("SELECT user_password FROM users WHERE login = ")
+////                        .append(password);
+//
+//            statement = manager.getConnection().createStatement();
+//            ResultSet resultSet1 = statement.executeQuery(userPasswordCheck.toString());
+//            if (resultSet1.equals(password)) {
+//                StringBuilder accessType = new StringBuilder();
+//                accessType
+//                        .append("SELECT access FROM users WHERE login IN ('")
+//                        .append(userName)
+//                        .append("')");
+//                ResultSet resultSet2 = statement.executeQuery(accessType.toString());
+//
+//                if (resultSet2.equals("admin"))
+//                    loggedUser = new Admin();
+//                else if (resultSet2.equals("client"))
+//                    loggedUser = new Client();
+//                return true;
+//            }
+//            else
+//                return false;
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return false;
     }
 
     public boolean isLoggedIn() {
-        Pair<String, String> loginData = loginDialog();
-
-        if (loginData == null) {
-            System.out.printf("canceled");
-            return false;
-        } else {
-            System.out.println("Username=" + loginData.getKey() + ", Password=" + loginData.getValue());
-            return true;
-        }
+        return loggedUser != null;
+//        Pair<String, String> loginData = loginDialog();
+//
+//        if (loginData == null) {
+//            System.out.printf("canceled");
+//            return false;
+//        } else {
+//            System.out.println("Username=" + loginData.getKey() + ", Password=" + loginData.getValue());
+//            return true;
+//        }
     }
 
 

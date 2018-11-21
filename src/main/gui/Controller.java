@@ -56,17 +56,20 @@ public class Controller {
             e.printStackTrace();
         }
         return comboBox;
+
+        //Main.getInstance().getLoginManager().getLoggedUser()
     }
 
     @FXML
     public void initialize(){
 
-
-        getDepartureList(departureList);
+        //dopasowac gui do accesu usera
+        //getDepartureList(departureList);
 
     }
 
-
+    @FXML
+    TabPane mainTabPanel;
 
     @FXML
     ComboBox destinationList;

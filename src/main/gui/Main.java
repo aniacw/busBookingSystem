@@ -11,20 +11,39 @@ import main.LoginManager;
 import main.db.CSVLoader;
 
 public class Main extends Application {
+    private static Main instance = null;
 
+    public static Main getInstance() {
+        return instance;
+    }
+
+    private DataBaseManager dataBaseManager;
+    private LoginManager loginManager;
+
+    public DataBaseManager getDataBaseManager() {
+        return dataBaseManager;
+    }
+
+    public LoginManager getLoginManager() {
+        return loginManager;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        DataBaseManager manager = new DataBaseManager();
-        manager.connect("busschedule", "root", "123456");
-        LoginManager loginManager = new LoginManager(manager);
-        CSVLoader csvLoader = new CSVLoader(manager);
-        csvLoader.loadIntoTable("C:\\Users\\Ania\\Desktop\\BUS.csv", "USERS");
-        csvLoader.loadIntoTable("C:\\Users\\Ania\\Desktop\\Routes.csv", "routes");
-        csvLoader.loadIntoTable("C:\\Users\\Ania\\Desktop\\Departures.csv", "departures");
+        dataBaseManager = new DataBaseManager();
+        loginManager = new LoginManager(dataBaseManager);
+        instance = this;
 
-
-        LoginManager.getInstance();
+        dataBaseManager.connect("busschedule", "root", "123456");
+        LoginManager loginManager = new LoginManager(dataBaseManager);
+        CSVLoader csvLoader = new CSVLoader(dataBaseManager);
+        //csvLoader.loadIntoTable("C:\\Users\\Ania\\Desktop\\BUS.csv", "USERS");
+        //csvLoader.loadIntoTable("C:\\Users\\Ania\\Desktop\\Routes.csv", "routes");
+        //csvLoader.loadIntoTable("C:\\Users\\Ania\\Desktop\\Departures.csv", "departures");
+        boolean loginSuccess = false;
+        do {
+            loginSuccess = loginManager.loginDialog();
+        } while (!loginSuccess);
 
         if (loginManager.isLoggedIn()) {
             Pane root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
