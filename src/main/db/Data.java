@@ -12,13 +12,13 @@ public class Data {
         columns = resultSet.getMetaData().getColumnCount();
         while (resultSet.next()) {
             Object[] row = new Object[columns]; //row odpowiada za 1 rzad
-            for (int i=0; i<columns; ++i)
-                row[i] = resultSet.getObject(i+1);
+            for (int i = 0; i < columns; ++i)
+                row[i] = resultSet.getObject(i + 1);
             data.add(row);
         }
     }
 
-    public Data(){
+    public Data() {
         data = new ArrayList<>();
     }
 
@@ -27,34 +27,36 @@ public class Data {
         initialize(resultSet);
     }
 
-    public <T> T get(int row, int column){
-        return (T)data.get(row-1)[column-1];
+    public <T> T get(int row, int column) {
+        return (T) data.get(row - 1)[column - 1];
     }
 
-    public <T> T getFromTopRow(int column){
-        return (T)data.get(0)[column-1];
+    public <T> T getFromTopRow(int column) {
+        return (T) data.get(0)[column - 1];
     }
 
-    public Object[] getRow(int row){
-        return data.get(row-1);
+    public Object[] getRow(int row) {
+        return data.get(row - 1);
     }
+
+
 
     public int getColumnCount() {
         return columns;
     }
 
-    public int getRowCount(){
+    public int getRowCount() {
         return data.size();
     }
 
-    public <T> T asSingleObject(){
+    public <T> T asSingleObject() {
         if (columns == 1 && data.size() == 1)
-            return (T)data.get(0)[0];
+            return (T) data.get(0)[0];
         else
             return null;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return data.isEmpty();
     }
 }

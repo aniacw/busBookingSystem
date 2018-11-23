@@ -1,17 +1,21 @@
 package main.gui;
 
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import main.db.Data;
 import main.db.DataBaseManager;
 
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ResourceBundle;
 
 public class Controller {
+
+    Data data;
 
     @FXML
     Tab reservation;
@@ -35,38 +39,32 @@ public class Controller {
     Label destiantion;
 
     @FXML
-    ComboBox departureList; // = getDepartureList();
+    ComboBox departureList;
 
+    private String routes;
+    private String departure;
+//    public ComboBox getDepartureList(ComboBox comboBox) {
+//        try {
+//            statement = manager.getConnection().createStatement();
+//            StringBuilder getDepartureListQuery = new StringBuilder();
+//            getDepartureListQuery
+//                    .append("SELECT departure FROM routes");
+//            ResultSet resultSet = statement.executeQuery(getDepartureListQuery.toString());
+//
+//            int index = 0;
+//            while (resultSet.next()) {
+//                comboBox.getItems().add(resultSet.getString(index));
+//                index++;
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return comboBox;
+//
+//        //Main.getInstance().getLoginManager().getLoggedUser()
+//    }
 
-    public ComboBox getDepartureList(ComboBox comboBox) {
-        try {
-            statement = manager.getConnection().createStatement();
-            StringBuilder getDepartureListQuery = new StringBuilder();
-            getDepartureListQuery
-                    .append("SELECT departure FROM routes");
-            ResultSet resultSet = statement.executeQuery(getDepartureListQuery.toString());
-
-            int index = 0;
-            while (resultSet.next()) {
-                comboBox.getItems().add(resultSet.getString(index));
-                index++;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return comboBox;
-
-        //Main.getInstance().getLoginManager().getLoggedUser()
-    }
-
-    @FXML
-    public void initialize(){
-
-        //dopasowac gui do accesu usera
-        //getDepartureList(departureList);
-
-    }
 
     @FXML
     TabPane mainTabPanel;
@@ -148,6 +146,18 @@ public class Controller {
 
     @FXML
     TextField date;
+
+    @FXML
+    public void initialize() throws SQLException {
+
+        departureList.getItems().addAll(manager.getColumnFromTable("departure", "routes"));
+        destinationList.getItems().addAll(manager.getColumnFromTable("destination", "routes"));
+
+
+        //dopasowac gui do accesu usera
+        //getDepartureList(departureList);
+
+    }
 
 
     private Statement statement;

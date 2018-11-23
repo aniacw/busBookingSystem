@@ -70,8 +70,6 @@ public class LoginManager {
             loginButton.setDisable(newValue.trim().isEmpty());
         });
 
-//sprawdzanie danych usera
-
 
         dialog.getDialogPane().setContent(grid);
         dialog.setResultConverter(
@@ -85,12 +83,11 @@ public class LoginManager {
 
 // Convert the result to a username-password-pair when the login button is clicked.
         Optional<Pair<String, String>> result = dialog.showAndWait();
-        if (result.isPresent()){
+        if (result.isPresent()) {
             Pair<String, String> resultData = result.get();
             loggedUser = null;
             return verifyCredentials(resultData.getKey(), resultData.getValue());
-        }
-        else
+        } else
             return true;
     }
 
@@ -102,19 +99,16 @@ public class LoginManager {
                 return false;
             String dbPassword = data.getFromTopRow(3);
             String dbAccess = data.getFromTopRow(4);
-            if (dbPassword.equals(password)){
-                if (dbAccess.equals("admin")){
+            if (dbPassword.equals(password)) {
+                if (dbAccess.equals("admin")) {
                     loggedUser = new Admin(userName, password);
                     return true;
-                }
-                else if (dbAccess.equals("client")) {
+                } else if (dbAccess.equals("client")) {
                     loggedUser = new Client(userName, password);
                     return true;
-                }
-                else
+                } else
                     return false; //wyrzucic jakis sensowny wyjatek (?)
-            }
-            else
+            } else
                 return false;
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,8 +1,5 @@
 package main.db;
 
-import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -79,7 +76,6 @@ public class DataBaseManager {
         return new Data(statement.executeQuery(getData.toString()));
     }
 
-
     public Data selectWhereColumnEquals(String table, String column, String value) throws SQLException {
         StringBuilder getData = new StringBuilder();
         getData
@@ -96,7 +92,6 @@ public class DataBaseManager {
         return selectWhereColumnEquals(table, column, "'"+value+"'");
     }
 
-
     public Data getTable(String table) throws SQLException {
         StringBuilder getData = new StringBuilder();
         getData
@@ -105,34 +100,11 @@ public class DataBaseManager {
         return new Data(statement.executeQuery(getData.toString()));
     }
 
-    //nie wiem czy mi to potrzebne
-    public ArrayList getValuesFromTable(String column, String table) {
-        ArrayList arrayList = new ArrayList();
-        try {
-            statement = connection.createStatement();
-            StringBuilder getValuesQuery = new StringBuilder();
-            getValuesQuery
-                    .append("SELECT ")
-                    .append(column)
-                    .append(" FROM ")
-                    .append(table);
-            ResultSet resultSet = statement.executeQuery(getValuesQuery.toString());
-
-            while (resultSet.next()) {
-                arrayList.addAll((Collection) resultSet);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return arrayList;
-    }
 
     //"select * from users where login = '...' "
 
     boolean isConnected() {
         return connection != null;
     }
-
 
 }
