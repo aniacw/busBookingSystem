@@ -39,8 +39,6 @@ public class Data {
         return data.get(row - 1);
     }
 
-
-
     public int getColumnCount() {
         return columns;
     }

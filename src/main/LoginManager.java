@@ -12,11 +12,14 @@ import main.db.DataBaseManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Optional;
 
 public class LoginManager {
     private DataBaseManager manager;
-    private Statement statement;
+    private String dbAccess;
+    private Timestamp timestamp;
 
     public boolean userExists(String username) {
         return false;
@@ -87,6 +90,10 @@ public class LoginManager {
             Pair<String, String> resultData = result.get();
             loggedUser = null;
             return verifyCredentials(resultData.getKey(), resultData.getValue());
+
+//            if (loggedUser != null)
+//                manager.insertObjectsIntoTable("login_history", username, timestamp);
+//
         } else
             return true;
     }
@@ -98,7 +105,7 @@ public class LoginManager {
             if (data.isEmpty())
                 return false;
             String dbPassword = data.getFromTopRow(3);
-            String dbAccess = data.getFromTopRow(4);
+            dbAccess = data.getFromTopRow(4);
             if (dbPassword.equals(password)) {
                 if (dbAccess.equals("admin")) {
                     loggedUser = new Admin(userName, password);
@@ -155,26 +162,12 @@ public class LoginManager {
 //        return false;
     }
 
-    public boolean isLoggedIn() {
-        return loggedUser != null;
-//        Pair<String, String> loginData = loginDialog();
-//
-//        if (loginData == null) {
-//            System.out.printf("canceled");
-//            return false;
-//        } else {
-//            System.out.println("Username=" + loginData.getKey() + ", Password=" + loginData.getValue());
-//            return true;
-//        }
+    public String getDbAccess() {
+        return dbAccess;
     }
 
+    public boolean isLoggedIn() {
+        return loggedUser != null;
+    }
 
-//    boolean login(String login, String password){
-//        if (manager.isConnected()){
-//
-//        }
-//        else{
-//            return false;
-//        }
-//    }
 }

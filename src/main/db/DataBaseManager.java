@@ -100,9 +100,6 @@ public class DataBaseManager {
         return new Data(statement.executeQuery(getData.toString()));
     }
 
-
-    //"select * from users where login = '...' "
-
     boolean isConnected() {
         return connection != null;
     }
