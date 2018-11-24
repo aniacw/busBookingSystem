@@ -7,9 +7,10 @@ public class User {
     private String access;
     //access i wszystko z tym zwiazane
 
-    public User(String login, String password) {
+    public User(String login, String password, String access) {
         this.login = login;
         this.password = password;
+        this.access = access;
     }
 
     public User() {

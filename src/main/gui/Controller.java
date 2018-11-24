@@ -1,32 +1,29 @@
 package main.gui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import main.LoginManager;
 import main.db.Data;
 import main.db.DataBaseManager;
 
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ResourceBundle;
 
 public class Controller {
 
     private Statement statement;
     private DataBaseManager manager;
 
+
     @FXML
-    Tab reservation, busManagment, fareCalculator, adminPanel, tickets;
+    Tab reservation, busManagement, fareCalculator, adminPanel, tickets;
 
     @FXML
     Label departureLabel, destiantion;
 
     @FXML
-    ComboBox departureList, destinationList, busSelectList;
+    ComboBox<Object> departureList, destinationList, busSelectList;
 
     @FXML
     TabPane mainTabPanel;
@@ -47,18 +44,19 @@ public class Controller {
     @FXML
     public void initialize() throws SQLException {
 
-        accessTabs();
+        //    accessTabs();
 
-        departureList.getItems().addAll(manager.getColumnFromTable("departure", "routes"));
-        destinationList.getItems().addAll(manager.getColumnFromTable("destination", "routes"));
-        departureList.getItems().add("to sie nie pojawia");
+
+        Data data = Main.getInstance().getDataBaseManager().getColumnFromTable("departure", "routes");
+        for (Object[] row : data) {
+            departureList.getItems().add(String.valueOf(row));
+        }
 
     }
 
     public void accessTabs() {
         if (Main.getInstance().getLoginManager().getDbAccess().equals("client")) {
-            mainTabPanel.getTabs().remove(busManagment);
-            mainTabPanel.getTabs().removeAll(busManagment, adminPanel);
+            mainTabPanel.getTabs().removeAll(busManagement, adminPanel);
         }
     }
 

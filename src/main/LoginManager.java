@@ -108,10 +108,10 @@ public class LoginManager {
             dbAccess = data.getFromTopRow(4);
             if (dbPassword.equals(password)) {
                 if (dbAccess.equals("admin")) {
-                    loggedUser = new Admin(userName, password);
+                    loggedUser = new Admin(userName, password, dbAccess);
                     return true;
                 } else if (dbAccess.equals("client")) {
-                    loggedUser = new Client(userName, password);
+                    loggedUser = new Client(userName, password, dbAccess);
                     return true;
                 } else
                     return false; //wyrzucic jakis sensowny wyjatek (?)

@@ -3,8 +3,9 @@ package main.db;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Data {
+public class Data implements Iterable<Object[]> {
     private ArrayList<Object[]> data;
     private int columns;
 
@@ -56,5 +57,17 @@ public class Data {
 
     public boolean isEmpty() {
         return data.isEmpty();
+    }
+
+    @Override
+    public Iterator<Object[]> iterator() {
+
+
+        return data.iterator()  ;
+    }
+
+    @Override
+    public String toString() {
+        return null;
     }
 }
