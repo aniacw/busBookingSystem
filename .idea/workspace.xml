@@ -172,13 +172,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="fxml" value="4" />
-          <entry key="java" value="8261" />
+          <entry key="java" value="8265" />
           <entry key="sql" value="30" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="8261" />
+          <entry key="JAVA" value="8265" />
           <entry key="Scratch" value="30" />
           <entry key="XML" value="4" />
         </counts>
@@ -209,11 +209,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/db/DataBaseManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
-              <caret line="114" selection-start-line="114" selection-end-line="114" />
+            <state relative-caret-position="124">
+              <caret line="80" column="15" lean-forward="true" selection-start-line="80" selection-start-column="15" selection-end-line="80" selection-end-column="15" />
               <folding>
                 <element signature="method#connect#0;class#DataBaseManager#0" />
                 <element signature="method#insertObjectsIntoTable#0;class#DataBaseManager#0" />
@@ -227,8 +227,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/gui/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="74" selection-start-line="74" selection-end-line="74" />
+            <state relative-caret-position="481">
+              <caret line="85" column="25" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
               <folding>
                 <element signature="e#1649#1847#0" />
                 <element signature="e#2379#3130#0" />
@@ -238,7 +238,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/gui/mainWindow.fxml">
           <provider editor-type-id="text-editor">
             <state relative-caret-position="396">
@@ -246,15 +246,6 @@
             </state>
           </provider>
           <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://faace3a6-428a-47d2-acb5-2797865e41de/schema/busschedule/table/departures">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -269,7 +260,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/db/Data.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
+            <state relative-caret-position="22">
               <caret line="11" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="method#asSingleObject#0;class#Data#0" />
@@ -573,12 +564,12 @@
       <workItem from="1543068214480" duration="12908000" />
       <workItem from="1543101139108" duration="39000" />
       <workItem from="1543145603049" duration="5308000" />
-      <workItem from="1543153421014" duration="10957000" />
+      <workItem from="1543153421014" duration="11398000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143749000" />
+    <option name="totallyTimeSpent" value="144190000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -654,6 +645,12 @@
           <line>79</line>
           <properties />
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/db/DataBaseManager.java</url>
+          <line>87</line>
+          <properties />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -929,18 +926,6 @@
       </provider>
     </entry>
     <entry file="das://faace3a6-428a-47d2-acb5-2797865e41de/schema/busschedule/table/users" />
-    <entry file="file://$PROJECT_DIR$/src/main/db/Data.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="method#asSingleObject#0;class#Data#0" />
-            <element signature="e#1605#1606#0" expanded="true" />
-            <element signature="e#1632#1633#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/LoginManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1958">
@@ -984,14 +969,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/gui/mainWindow.fxml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="35" lean-forward="true" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
     <entry file="das://faace3a6-428a-47d2-acb5-2797865e41de/schema/busschedule/table/departures">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1013,10 +990,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/db/Data.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="method#asSingleObject#0;class#Data#0" />
+            <element signature="e#1605#1606#0" expanded="true" />
+            <element signature="e#1632#1633#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/gui/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="74" selection-start-line="74" selection-end-line="74" />
+        <state relative-caret-position="481">
+          <caret line="85" column="25" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
           <folding>
             <element signature="e#1649#1847#0" />
             <element signature="e#2379#3130#0" />
@@ -1027,8 +1016,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/db/DataBaseManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="114" selection-start-line="114" selection-end-line="114" />
+        <state relative-caret-position="124">
+          <caret line="80" column="15" lean-forward="true" selection-start-line="80" selection-start-column="15" selection-end-line="80" selection-end-column="15" />
           <folding>
             <element signature="method#connect#0;class#DataBaseManager#0" />
             <element signature="method#insertObjectsIntoTable#0;class#DataBaseManager#0" />
@@ -1037,6 +1026,14 @@
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/gui/mainWindow.fxml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="18" column="35" lean-forward="true" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
     </entry>
   </component>
   <component name="masterDetails">

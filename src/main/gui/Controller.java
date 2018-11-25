@@ -25,10 +25,10 @@ public class Controller {
     TabPane mainTabPanel;
 
     @FXML
-    TextField departureId, routeId, date, dateTextField;
+    TextField departureId, routeId, date, dateTextField, departureTimeTextField;
 
     @FXML
-    Button getBusDetailsButton, reset, loadBus, addBusButton, removeBusButton, fetchDataButton, updateDataButton, bookBusButton;
+    Button getBusDetailsButton, resetButton, loadBus, addBusButton, removeBusButton, fetchDataButton, updateDataButton, bookBusButton;
 
     @FXML
     GridPane seatPlan;
@@ -85,6 +85,14 @@ public class Controller {
         //WHERE routes.departure = city1
         //AND routes.destination = city2;
 
+    }
+
+    public void onButtonResetClicked() {
+        departureList.getSelectionModel().clearSelection();
+        destinationList.getSelectionModel().clearSelection();
+        dateTextField.clear();
+        preselectedBusesList.getSelectionModel().clearSelection();
+        departureTimeTextField.clear();
     }
 
     public void onBookBusButtonClicked() {

@@ -211,7 +211,7 @@
                                     <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                        <children>
                                           <Button fx:id="getBusDetailsButton" mnemonicParsing="false" onAction="#onGetBusDetailsButtonClicked" text="Get Bus Details" />
-                                          <Button mnemonicParsing="false" prefWidth="96.0" text="Reset" />
+                                          <Button fx:id="resetButton" mnemonicParsing="false" onAction="#onButtonResetClicked" prefWidth="96.0" text="Reset" />
                                        </children>
                                        <GridPane.margin>
                                           <Insets />
@@ -224,7 +224,7 @@
                                        <children>
                                           <VBox prefHeight="200.0" prefWidth="100.0">
                                              <children>
-                                                <TextField />
+                                                <TextField prefWidth="200.0" />
                                                 <Label text="Date format: YYYY-MM-DD " />
                                              </children>
                                           </VBox>
@@ -282,7 +282,7 @@
                                           <Font name="System Bold" size="15.0" />
                                        </font></Button>
                                     <Label text="Departure time" />
-                                    <TextField GridPane.rowIndex="1" />
+                                    <TextField fx:id="departureTimeTextField" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
                               <HBox GridPane.rowIndex="1">
