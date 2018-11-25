@@ -12,10 +12,6 @@ import java.sql.Statement;
 
 public class Controller {
 
-    private Statement statement;
-    private DataBaseManager manager;
-
-
     @FXML
     Tab reservation, busManagement, fareCalculator, adminPanel, tickets;
 
@@ -23,13 +19,13 @@ public class Controller {
     Label departureLabel, destiantion;
 
     @FXML
-    ComboBox<Object> departureList, destinationList, busSelectList;
+    ComboBox<Object> departureList, destinationList, busSelectList, preselectedBusesList;
 
     @FXML
     TabPane mainTabPanel;
 
     @FXML
-    TextField ddTextField, mmTextField, yyTextField, hh, mm, departureId, routeId, date;
+    TextField departureId, routeId, date, dateTextField;
 
     @FXML
     Button getBusDetailsButton, reset, loadBus, addBusButton, removeBusButton, fetchDataButton, updateDataButton, bookBusButton;
@@ -49,21 +45,16 @@ public class Controller {
 
         Data data = Main.getInstance().getDataBaseManager().getColumnFromTable("departure", "routes");
         for (Object[] row : data) {
-            departureList.getItems().add(row);
+            departureList.getItems().add(row.toString());
         }
 
         Data data1 = Main.getInstance().getDataBaseManager().getColumnFromTable("destination", "routes");
         for (Object[] row : data) {
-            destinationList.getItems().add(row);
+            destinationList.getItems().add(row.toString());
         }
 
     }
 
-    public void getBusDepartureDate() {
-        int day = Integer.parseInt(ddTextField.getText());
-        int month = Integer.parseInt(mmTextField.getText());
-        int year = Integer.parseInt(yyTextField.getText());
-    }
 
     public void accessTabs() {
         if (Main.getInstance().getLoginManager().getDbAccess().equals("client")) {
@@ -75,13 +66,18 @@ public class Controller {
         String departureSelected = departureList.getValue().toString();
         String destinationSelected = destinationList.getValue().toString();
 
-        Data routesPreselected = Main.getInstance().getDataBaseManager().
-                selectWhereColumnEquals("routes", "departure", departureSelected);
+//        Data routesPreselected = Main.getInstance().getDataBaseManager().
+//                selectWhereColumnEquals("routes", "departure", departureSelected);
+//
+//        Data routesPreselected2 = Main.getInstance().getDataBaseManager().
+//                selectWhereColumnEquals("routes", "destination", destinationSelected);
 
-        Data routesPreselected2 = Main.getInstance().getDataBaseManager().
-                selectWhereColumnEquals("routes", "destination", destinationSelected);
+        Data result = Main.getInstance().getDataBaseManager().selectWhereColumnEqualsJoinTables("routes",
+                departureSelected, destinationSelected, "route_id", "departures");
 
-
+        for (Object[] row : result) {
+            preselectedBusesList.getItems().add(row.toString());
+        }
 
     }
 
@@ -89,42 +85,42 @@ public class Controller {
     }
 
     public void onButtonAddBusClicked() {
-        try {
-            statement = manager.getConnection().createStatement();
-            StringBuilder addBusQuery = new StringBuilder();
-            addBusQuery
-                    .append("INSERT INTO departures (departure_id, route_id, departure_time) VALUES (")
-                    .append(departureId.getText())
-                    .append(",")
-                    .append(routeId.getText())
-                    .append(",")
-                    .append(date.getText())
-                    .append(")");
-
-            ResultSet resultSet = statement.executeQuery(addBusQuery.toString());
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            statement = manager.getConnection().createStatement();
+//            StringBuilder addBusQuery = new StringBuilder();
+//            addBusQuery
+//                    .append("INSERT INTO departures (departure_id, route_id, departure_time) VALUES (")
+//                    .append(departureId.getText())
+//                    .append(",")
+//                    .append(routeId.getText())
+//                    .append(",")
+//                    .append(date.getText())
+//                    .append(")");
+//
+//            ResultSet resultSet = statement.executeQuery(addBusQuery.toString());
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void onButtonRemoveBusClicked() {
-        try {
-            statement = manager.getConnection().createStatement();
-
-            StringBuilder removeBusQuery = new StringBuilder();
-            removeBusQuery
-                    .append("DELETE FROM departures WHERE departure_id = ")
-                    .append(departureId.getText())
-                    .append("AND WHERE route_id = ")
-                    .append(routeId.getText())
-                    .append("AND WHERE departure_time = ")
-                    .append(date.getText());
-
-            ResultSet resultSet = statement.executeQuery(removeBusQuery.toString());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            statement = manager.getConnection().createStatement();
+//
+//            StringBuilder removeBusQuery = new StringBuilder();
+//            removeBusQuery
+//                    .append("DELETE FROM departures WHERE departure_id = ")
+//                    .append(departureId.getText())
+//                    .append("AND WHERE route_id = ")
+//                    .append(routeId.getText())
+//                    .append("AND WHERE departure_time = ")
+//                    .append(date.getText());
+//
+//            ResultSet resultSet = statement.executeQuery(removeBusQuery.toString());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
 }

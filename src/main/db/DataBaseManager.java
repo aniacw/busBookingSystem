@@ -88,8 +88,35 @@ public class DataBaseManager {
         return new Data(statement.executeQuery(getData.toString()));
     }
 
+    public Data selectWhereColumnEqualsJoinTables(String table1, String column1, String column2,
+                                                  String primaryKey, String table2) throws SQLException {
+        StringBuilder getData = new StringBuilder();
+        getData
+                .append("SELECT * FROM ")
+                .append(table1)
+                .append(" INNER JOIN ")
+                .append(table2)
+                .append(" ON ")
+                .append(table1)
+                .append(".")
+                .append(primaryKey)
+                .append("=")
+                .append(table2)
+                .append(".")
+                .append(primaryKey)
+                .append(" WHERE ")
+                .append(table1)
+                .append(".departure = ")
+                .append(column1)
+                .append(" AND ")
+                .append(table1)
+                .append(".destination =")
+                .append(column2);
+        return new Data((statement.executeQuery(getData.toString())));
+    }
+
     public Data selectWhereColumnEqualsString(String table, String column, String value) throws SQLException {
-        return selectWhereColumnEquals(table, column, "'"+value+"'");
+        return selectWhereColumnEquals(table, column, "'" + value + "'");
     }
 
     public Data getTable(String table) throws SQLException {
