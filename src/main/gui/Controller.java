@@ -79,6 +79,12 @@ public class Controller {
             preselectedBusesList.getItems().add(row.toString());
         }
 
+        //SELECT * FROM routes
+        //INNER JOIN departures
+        //ON routes.route_id = departures.route_id
+        //WHERE routes.departure = city1
+        //AND routes.destination = city2;
+
     }
 
     public void onBookBusButtonClicked() {
