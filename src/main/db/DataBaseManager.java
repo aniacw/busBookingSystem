@@ -52,7 +52,7 @@ public class DataBaseManager {
         statement.executeUpdate(builder.toString());
     }
 
-    public void insertValuesIntoTable(String tableName, String columnOrder, String row) throws SQLException {
+    public void insertValuesIntoNewTable(String tableName, String columnOrder, String row) throws SQLException {
         StringBuilder builder = new StringBuilder(25 + tableName.length() + columnOrder.length() + row.length());
         builder
                 .append("INSERT INTO ")
@@ -60,6 +60,17 @@ public class DataBaseManager {
                 .append('(')
                 .append(columnOrder)
                 .append(')')
+                .append(" VALUES(")
+                .append(row)
+                .append(')');
+        statement.executeUpdate(builder.toString());
+    }
+
+    public void insertValuesIntoExistingTable(String tableName, String row) throws SQLException {
+        StringBuilder builder = new StringBuilder();
+        builder
+                .append("INSERT INTO ")
+                .append(tableName)
                 .append(" VALUES(")
                 .append(row)
                 .append(')');

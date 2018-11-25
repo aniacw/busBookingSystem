@@ -18,7 +18,7 @@ public class CSVLoader {
         String header = scanner.nextLine();
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
-            dataBaseManager.insertValuesIntoTable(tableName, header, line);
+            dataBaseManager.insertValuesIntoNewTable(tableName, header, line);
         }
     }
 

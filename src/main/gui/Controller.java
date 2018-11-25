@@ -25,7 +25,8 @@ public class Controller {
     TabPane mainTabPanel;
 
     @FXML
-    TextField departureId, routeId, date, dateTextField, departureTimeTextField;
+    TextField departureId, routeId, date, dateTextField, departureTimeTextField, destinationTextField,
+            departureTextField, busNoTextField;
 
     @FXML
     Button getBusDetailsButton, resetButton, loadBus, addBusButton, removeBusButton, fetchDataButton, updateDataButton, bookBusButton;
@@ -99,42 +100,26 @@ public class Controller {
     }
 
     public void onButtonAddBusClicked() {
-//        try {
-//            statement = manager.getConnection().createStatement();
-//            StringBuilder addBusQuery = new StringBuilder();
-//            addBusQuery
-//                    .append("INSERT INTO departures (departure_id, route_id, departure_time) VALUES (")
-//                    .append(departureId.getText())
-//                    .append(",")
-//                    .append(routeId.getText())
-//                    .append(",")
-//                    .append(date.getText())
-//                    .append(")");
-//
-//            ResultSet resultSet = statement.executeQuery(addBusQuery.toString());
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+
+        StringBuilder rowToInsert = new StringBuilder();
+        rowToInsert
+                .append(departureTextField.getText())
+                .append(", ")
+                .append(destinationTextField.getText())
+                .append(", ")
+                .append(" ")
+                .append(", ")
+                .append(busNoTextField.getText());
+
+        try {
+            Main.getInstance().getDataBaseManager().insertValuesIntoExistingTable("routes", rowToInsert.toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onButtonRemoveBusClicked() {
-//        try {
-//            statement = manager.getConnection().createStatement();
-//
-//            StringBuilder removeBusQuery = new StringBuilder();
-//            removeBusQuery
-//                    .append("DELETE FROM departures WHERE departure_id = ")
-//                    .append(departureId.getText())
-//                    .append("AND WHERE route_id = ")
-//                    .append(routeId.getText())
-//                    .append("AND WHERE departure_time = ")
-//                    .append(date.getText());
-//
-//            ResultSet resultSet = statement.executeQuery(removeBusQuery.toString());
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+
     }
 
 }
