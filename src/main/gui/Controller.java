@@ -32,7 +32,7 @@ public class Controller {
     TextField ddTextField, mmTextField, yyTextField, hh, mm, departureId, routeId, date;
 
     @FXML
-    Button getBusDetails, reset, loadBus, addBusButton, removeBusButton, fetchDataButton, updateDataButton;
+    Button getBusDetailsButton, reset, loadBus, addBusButton, removeBusButton, fetchDataButton, updateDataButton, bookBusButton;
 
     @FXML
     GridPane seatPlan;
@@ -49,15 +49,43 @@ public class Controller {
 
         Data data = Main.getInstance().getDataBaseManager().getColumnFromTable("departure", "routes");
         for (Object[] row : data) {
-            departureList.getItems().add(String.valueOf(row));
+            departureList.getItems().add(row);
         }
 
+        Data data1 = Main.getInstance().getDataBaseManager().getColumnFromTable("destination", "routes");
+        for (Object[] row : data) {
+            destinationList.getItems().add(row);
+        }
+
+    }
+
+    public void getBusDepartureDate() {
+        int day = Integer.parseInt(ddTextField.getText());
+        int month = Integer.parseInt(mmTextField.getText());
+        int year = Integer.parseInt(yyTextField.getText());
     }
 
     public void accessTabs() {
         if (Main.getInstance().getLoginManager().getDbAccess().equals("client")) {
             mainTabPanel.getTabs().removeAll(busManagement, adminPanel);
         }
+    }
+
+    public void onGetBusDetailsButtonClicked() throws SQLException {
+        String departureSelected = departureList.getValue().toString();
+        String destinationSelected = destinationList.getValue().toString();
+
+        Data routesPreselected = Main.getInstance().getDataBaseManager().
+                selectWhereColumnEquals("routes", "departure", departureSelected);
+
+        Data routesPreselected2 = Main.getInstance().getDataBaseManager().
+                selectWhereColumnEquals("routes", "destination", destinationSelected);
+
+
+
+    }
+
+    public void onBookBusButtonClicked() {
     }
 
     public void onButtonAddBusClicked() {
