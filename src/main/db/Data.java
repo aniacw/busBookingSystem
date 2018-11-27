@@ -61,13 +61,14 @@ public class Data implements Iterable<Object[]> {
 
     @Override
     public Iterator<Object[]> iterator() {
-
-
-        return data.iterator()  ;
+        return data.iterator();
     }
+
 
     @Override
     public String toString() {
-        return null;
+        return "Data{" +
+                "data=" + data +
+                '}';
     }
 }

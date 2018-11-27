@@ -2,11 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/gui/AlertDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/db/CSVLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/db/CSVLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/busBookingSystem/main/LoginManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/busBookingSystem/main/LoginManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/busBookingSystem/main/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/busBookingSystem/main/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/busBookingSystem/main/db/CSVLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/busBookingSystem/main/db/CSVLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/busBookingSystem/main/db/Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/busBookingSystem/main/db/Data.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/busBookingSystem/main/db/DataBaseManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/busBookingSystem/main/db/DataBaseManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/busBookingSystem/main/gui/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/busBookingSystem/main/gui/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/busBookingSystem/main/gui/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/busBookingSystem/main/gui/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/busBookingSystem/main/gui/mainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/busBookingSystem/main/gui/mainWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/LoginManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/LoginManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/db/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/db/Data.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/db/DataBaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/db/DataBaseManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/gui/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/gui/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/gui/mainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/gui/mainWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/gui/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/gui/Main.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,7 +63,7 @@
         <item name="busschedule@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="busschedule: schema" type="c314c289:MysqlImplModel$Schema" />
-        <item name="departures: table" type="98d5ac3d:MysqlImplModel$Table" />
+        <item name="login_history: table" type="98d5ac3d:MysqlImplModel$Table" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -159,12 +170,14 @@
     <session id="1190758780">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="19" />
+          <entry key="project.closed" value="21" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.15" value="2" />
           <entry key="project.open.time.18" value="2" />
+          <entry key="project.open.time.21" value="1" />
           <entry key="project.open.time.24" value="1" />
-          <entry key="project.open.time.26" value="1" />
+          <entry key="project.open.time.26" value="2" />
+          <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.29" value="2" />
           <entry key="project.open.time.30" value="2" />
           <entry key="project.open.time.31" value="1" />
@@ -173,40 +186,41 @@
           <entry key="project.open.time.43" value="1" />
           <entry key="project.open.time.6" value="3" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="19" />
+          <entry key="project.opened" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="fxml" value="4" />
-          <entry key="java" value="8586" />
+          <entry key="java" value="9304" />
           <entry key="sql" value="30" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="8586" />
+          <entry key="JAVA" value="9304" />
           <entry key="Scratch" value="30" />
           <entry key="XML" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="11" />
+          <entry key="class" value="21" />
           <entry key="departures" value="5" />
-          <entry key="fxml" value="11" />
-          <entry key="java" value="101" />
+          <entry key="fxml" value="16" />
+          <entry key="java" value="114" />
+          <entry key="routes" value="2" />
           <entry key="sql" value="1" />
-          <entry key="users" value="11" />
+          <entry key="users" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="11" />
-          <entry key="Database Element" value="16" />
-          <entry key="JAVA" value="101" />
+          <entry key="CLASS" value="21" />
+          <entry key="Database Element" value="22" />
+          <entry key="JAVA" value="114" />
           <entry key="Scratch" value="1" />
-          <entry key="XML" value="11" />
+          <entry key="XML" value="16" />
         </counts>
       </usages-collector>
     </session>
@@ -217,28 +231,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/db/DataBaseManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="581">
-              <caret line="72" column="34" lean-forward="true" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="34" />
-              <folding>
-                <element signature="method#connect#0;class#DataBaseManager#0" />
-                <element signature="method#insertObjectsIntoTable#0;class#DataBaseManager#0" />
-                <element signature="method#getTable#0;class#DataBaseManager#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/db/CSVLoader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="20" column="47" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
-              <folding>
-                <element signature="e#270#271#0" expanded="true" />
-                <element signature="e#324#325#0" expanded="true" />
-              </folding>
+        <entry file="das://faace3a6-428a-47d2-acb5-2797865e41de/schema/busschedule/table/users">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -246,11 +242,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/gui/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="105" column="55" lean-forward="true" selection-start-line="105" selection-start-column="55" selection-end-line="105" selection-end-column="55" />
-              <folding>
-                <element signature="method#onButtonResetClicked#0;class#Controller#0" />
-              </folding>
+            <state relative-caret-position="432">
+              <caret line="106" column="12" selection-start-line="106" selection-start-column="12" selection-end-line="106" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -266,7 +259,20 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://faace3a6-428a-47d2-acb5-2797865e41de/schema/busschedule/table/users">
+        <entry file="file://$PROJECT_DIR$/src/main/gui/AlertDialog.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="352">
+              <caret line="16" column="7" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="16" selection-end-column="7" />
+              <folding>
+                <element signature="e#331#332#0" expanded="true" />
+                <element signature="e#359#360#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://faace3a6-428a-47d2-acb5-2797865e41de/schema/busschedule/table/routes">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
               <filtering enabled="true" />
@@ -277,38 +283,24 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/db/Data.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="461">
+              <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
               <folding>
                 <element signature="method#asSingleObject#0;class#Data#0" />
-                <element signature="e#1605#1606#0" expanded="true" />
-                <element signature="e#1632#1633#0" expanded="true" />
+                <element signature="e#1517#1518#0" expanded="true" />
+                <element signature="e#1555#1556#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/LoginManager.java">
+        <entry file="file://$PROJECT_DIR$/src/main/db/DataBaseManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1958">
-              <caret line="109" selection-start-line="109" selection-end-line="109" />
+            <state relative-caret-position="508">
+              <caret line="51" selection-start-line="51" selection-end-line="51" />
               <folding>
-                <element signature="e#672#673#0" expanded="true" />
-                <element signature="e#710#711#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/gui/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="792">
-              <caret line="52" column="9" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
-              <folding>
-                <element signature="e#1108#1180#0" />
-                <element signature="e#1788#1848#0" />
+                <element signature="method#getTable#0;class#DataBaseManager#0" />
               </folding>
             </state>
           </provider>
@@ -362,15 +354,16 @@
         <option value="$PROJECT_DIR$/src/main/Customer.java" />
         <option value="$PROJECT_DIR$/src/main/db/DeparturesManager.java" />
         <option value="$PROJECT_DIR$/src/main/Ticket.java" />
-        <option value="$PROJECT_DIR$/src/main/User.java" />
         <option value="$PROJECT_DIR$/src/main/Client.java" />
         <option value="$PROJECT_DIR$/src/main/Admin.java" />
+        <option value="$PROJECT_DIR$/src/main/db/CSVLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/gui/mainWindow.fxml" />
+        <option value="$PROJECT_DIR$/src/main/User.java" />
+        <option value="$PROJECT_DIR$/src/main/db/Data.java" />
         <option value="$PROJECT_DIR$/src/main/LoginManager.java" />
         <option value="$PROJECT_DIR$/src/main/gui/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/db/Data.java" />
-        <option value="$PROJECT_DIR$/src/main/db/CSVLoader.java" />
         <option value="$PROJECT_DIR$/src/main/db/DataBaseManager.java" />
-        <option value="$PROJECT_DIR$/src/main/gui/mainWindow.fxml" />
+        <option value="$PROJECT_DIR$/src/main/gui/AlertDialog.java" />
         <option value="$PROJECT_DIR$/src/main/gui/Controller.java" />
       </list>
     </option>
@@ -398,7 +391,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -439,6 +431,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -453,7 +446,7 @@
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543188098468" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543360567577" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="C:/Program Files/Java/javafx-sdk-11.0.1" />
@@ -583,11 +576,14 @@
       <workItem from="1543145603049" duration="5308000" />
       <workItem from="1543153421014" duration="12089000" />
       <workItem from="1543185649555" duration="2555000" />
+      <workItem from="1543189835580" duration="354000" />
+      <workItem from="1543249500821" duration="8804000" />
+      <workItem from="1543339987666" duration="9686000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147436000" />
+    <option name="totallyTimeSpent" value="166280000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -600,8 +596,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1098" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.10580021" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.14017186" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -610,8 +607,8 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32867885" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2717508" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39957035" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3480129" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.2932331" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32975295" />
@@ -635,7 +632,7 @@
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
-      <window_info active="true" anchor="right" id="Database" order="10" sideWeight="0.783029" visible="true" weight="0.15145005" />
+      <window_info anchor="right" id="Database" order="10" sideWeight="0.783029" visible="true" weight="0.12083781" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -658,16 +655,16 @@
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/db/DataBaseManager.java</url>
-          <line>90</line>
+          <url>file://$PROJECT_DIR$/src/main/LoginManager.java</url>
+          <line>94</line>
           <properties />
-          <option name="timeStamp" value="9" />
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/db/DataBaseManager.java</url>
-          <line>98</line>
+          <url>file://$PROJECT_DIR$/src/main/LoginManager.java</url>
+          <line>126</line>
           <properties />
-          <option name="timeStamp" value="10" />
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -677,45 +674,10 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.46/mysql-connector-java-5.1.46.jar!/com/mysql/jdbc/AbandonedConnectionCleanupThread.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.46/mysql-connector-java-5.1.46.jar!/com/mysql/fabric/jdbc/FabricMySQLDriver.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/sql/DriverManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
           <caret line="269" selection-start-line="269" selection-end-line="269" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.46/mysql-connector-java-5.1.46.jar!/com/mysql/jdbc/StringUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="814" selection-start-line="814" selection-end-line="814" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.46/mysql-connector-java-5.1.46.jar!/com/mysql/jdbc/NonRegisteringDriver.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="74" selection-start-line="74" selection-end-line="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.46/mysql-connector-java-5.1.46.jar!/com/mysql/jdbc/Driver.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
@@ -873,13 +835,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.46/mysql-connector-java-5.1.46.jar!/com/mysql/jdbc/ConnectionImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="3311" selection-start-line="3311" selection-end-line="3311" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.46/mysql-connector-java-5.1.46.jar!/com/mysql/jdbc/ResultSetImpl.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -896,13 +851,6 @@
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/javafx-src.zip!/com/sun/javafx/application/PlatformImpl.java">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Client.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -939,47 +887,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://faace3a6-428a-47d2-acb5-2797865e41de/schema/busschedule/table/users">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/LoginManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1958">
-          <caret line="109" selection-start-line="109" selection-end-line="109" />
-          <folding>
-            <element signature="e#672#673#0" expanded="true" />
-            <element signature="e#710#711#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/gui/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="52" column="9" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
-          <folding>
-            <element signature="e#1108#1180#0" />
-            <element signature="e#1788#1848#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/db/Data.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="method#asSingleObject#0;class#Data#0" />
-            <element signature="e#1605#1606#0" expanded="true" />
-            <element signature="e#1632#1633#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/db/CSVLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -991,33 +898,159 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/FareCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="18" column="30" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+          <folding>
+            <element signature="e#405#406#0" expanded="true" />
+            <element signature="e#440#441#0" expanded="true" />
+            <element signature="e#471#472#0" expanded="true" />
+            <element signature="e#504#505#0" expanded="true" />
+            <element signature="e#533#534#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.46/mysql-connector-java-5.1.46.jar!/com/mysql/fabric/jdbc/FabricMySQLDriver.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.46/mysql-connector-java-5.1.46.jar!/com/mysql/jdbc/StringUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="1036" selection-start-line="1036" selection-end-line="1036" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.46/mysql-connector-java-5.1.46.jar!/com/mysql/jdbc/ConnectionImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="250" selection-start-line="250" selection-end-line="250" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.46/mysql-connector-java-5.1.46.jar!/com/mysql/jdbc/Util.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="270" selection-start-line="270" selection-end-line="270" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.46/mysql-connector-java-5.1.46.jar!/com/mysql/jdbc/AbandonedConnectionCleanupThread.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.46/mysql-connector-java-5.1.46.jar!/com/mysql/jdbc/NonRegisteringDriver.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="527" selection-start-line="527" selection-end-line="527" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J/5.1.46/mysql-connector-java-5.1.46.jar!/com/mysql/jdbc/Driver.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/lang/Runnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="67" column="25" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/LoginManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="126" selection-start-line="126" selection-end-line="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/gui/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="50" column="56" selection-start-line="50" selection-start-column="56" selection-end-line="50" selection-end-column="56" />
+          <folding>
+            <element signature="e#1788#1848#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/db/Data.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+          <folding>
+            <element signature="method#asSingleObject#0;class#Data#0" />
+            <element signature="e#1517#1518#0" expanded="true" />
+            <element signature="e#1555#1556#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/db/DataBaseManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="581">
-          <caret line="72" column="34" lean-forward="true" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="34" />
+        <state relative-caret-position="508">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
           <folding>
-            <element signature="method#connect#0;class#DataBaseManager#0" />
-            <element signature="method#insertObjectsIntoTable#0;class#DataBaseManager#0" />
             <element signature="method#getTable#0;class#DataBaseManager#0" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="das://faace3a6-428a-47d2-acb5-2797865e41de/schema/busschedule/table/routes">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/gui/mainWindow.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
       <provider editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
         </state>
       </provider>
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="das://faace3a6-428a-47d2-acb5-2797865e41de/schema/busschedule/table/users">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/gui/AlertDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="16" column="7" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="16" selection-end-column="7" />
+          <folding>
+            <element signature="e#331#332#0" expanded="true" />
+            <element signature="e#359#360#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/gui/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="105" column="55" lean-forward="true" selection-start-line="105" selection-start-column="55" selection-end-line="105" selection-end-column="55" />
-          <folding>
-            <element signature="method#onButtonResetClicked#0;class#Controller#0" />
-          </folding>
+        <state relative-caret-position="432">
+          <caret line="106" column="12" selection-start-line="106" selection-start-column="12" selection-end-line="106" selection-end-column="12" />
         </state>
       </provider>
     </entry>

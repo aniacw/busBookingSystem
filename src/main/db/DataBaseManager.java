@@ -72,8 +72,8 @@ public class DataBaseManager {
                 .append("INSERT INTO ")
                 .append(tableName)
                 .append(" VALUES(")
-                .append(row)
-                .append(')');
+                .append(row);
+                //.append(')');
         statement.executeUpdate(builder.toString());
     }
 
@@ -100,7 +100,8 @@ public class DataBaseManager {
     }
 
     public Data selectWhereColumnEqualsJoinTables(String table1, String column1, String column2,
-                                                  String primaryKey, String table2) throws SQLException {
+                                                  String primaryKey, String table2,
+                                                  String selectFromColumn1, String selectFromColumn2) throws SQLException {
         StringBuilder getData = new StringBuilder();
         getData
                 .append("SELECT * FROM ")
@@ -111,19 +112,29 @@ public class DataBaseManager {
                 .append(table1)
                 .append(".")
                 .append(primaryKey)
-                .append("=")
+                .append(" = ")
                 .append(table2)
                 .append(".")
                 .append(primaryKey)
                 .append(" WHERE ")
                 .append(table1)
-                .append(".departure = ")
+                .append(".")
                 .append(column1)
+                .append(" = ")
+                .append(selectFromColumn1)
                 .append(" AND ")
                 .append(table1)
-                .append(".destination =")
-                .append(column2);
+                .append(".")
+                .append(column2)
+                .append(" = ")
+                .append(selectFromColumn2);
         return new Data((statement.executeQuery(getData.toString())));
+
+        //SELECT * FROM routes
+        //INNER JOIN departures
+        //ON routes.route_id = departures.route_id
+        //WHERE routes.departure = city1
+        //AND routes.destination = city2;
     }
 
     public Data selectWhereColumnEqualsString(String table, String column, String value) throws SQLException {

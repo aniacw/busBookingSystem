@@ -47,8 +47,8 @@ public class Main extends Application {
 
         if (loginManager.isLoggedIn()) {
             Pane root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
-            primaryStage.setTitle("Hello World");
-            primaryStage.setScene(new Scene(root, 900, 500));
+            primaryStage.setTitle("Book a Dream Bus!");
+            primaryStage.setScene(new Scene(root, 900, 600));
             primaryStage.show();
         }
 

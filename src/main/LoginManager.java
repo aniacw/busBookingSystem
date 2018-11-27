@@ -8,18 +8,20 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import main.db.Data;
 import main.db.DataBaseManager;
+import main.gui.Main;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 
 public class LoginManager {
     private DataBaseManager manager;
     private String dbAccess;
-    private Timestamp timestamp;
+    private SimpleDateFormat currentTime;
 
     public boolean userExists(String username) {
         return false;
@@ -90,12 +92,25 @@ public class LoginManager {
             Pair<String, String> resultData = result.get();
             loggedUser = null;
             return verifyCredentials(resultData.getKey(), resultData.getValue());
-
-//            if (loggedUser != null)
-//                manager.insertObjectsIntoTable("login_history", username, timestamp);
-//
+           // currentTime = new SimpleDateFormat();
         } else
             return true;
+    }
+
+    public void addToLoginHistory(String logged){
+        if (loggedUser != null){
+            StringBuilder rowToInsert = new StringBuilder();
+            rowToInsert
+                    .append(loggedUser.getLogin())
+                    .append(", ");
+                    //.append(timestamp);
+            try {
+                Main.getInstance().getDataBaseManager().insertValuesIntoExistingTable(
+                        "login_history", rowToInsert.toString());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public boolean verifyCredentials(String userName, String password) {
