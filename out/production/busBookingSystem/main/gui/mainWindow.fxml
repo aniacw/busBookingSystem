@@ -242,7 +242,7 @@
                                        <children>
                                           <VBox prefHeight="200.0" prefWidth="100.0">
                                              <children>
-                                                <TextField prefWidth="200.0" />
+                                                <TextField fx:id="dateTextField" prefWidth="200.0" />
                                                 <Label text="Date format: YYYY-MM-DD " />
                                              </children>
                                           </VBox>

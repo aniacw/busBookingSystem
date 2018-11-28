@@ -3,12 +3,13 @@ package main.gui;
 import javafx.scene.control.Alert;
 
 public class AlertDialog {
-
-    private Alert alert;
-
-    public AlertDialog(String message) {
-       this.alert = new Alert(Alert.AlertType.INFORMATION);
+    public static void show(String message, Alert.AlertType type) {
+       Alert alert = new Alert(type);
        alert.setContentText(message);
        alert.showAndWait();
+    }
+
+    public static void show(String message) {
+        show(message, Alert.AlertType.INFORMATION);
     }
 }

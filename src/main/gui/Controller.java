@@ -27,8 +27,15 @@ public class Controller {
     TabPane mainTabPanel;
 
     @FXML
-    TextField departureId, routeId, date, dateTextField, departureTimeTextField, destinationTextField,
-            departureTextField, busNoTextField;
+    TextField
+            departureId,
+            routeId,
+            date,
+            dateTextField,
+            departureTimeTextField,
+            destinationTextField,
+            departureTextField,
+            busNoTextField;
 
     @FXML
     Button getBusDetailsButton, resetButton, loadBus, addBusButton, removeBusButton, fetchDataButton, updateDataButton, bookBusButton;
@@ -43,16 +50,16 @@ public class Controller {
     @FXML
     public void initialize() throws SQLException {
 
-        //  accessTabs();
+          accessTabs();
         Data data = Main.getInstance().getDataBaseManager().getColumnFromTable("departure", "routes");
-        for (Object[] row : data) {
-            String rowString = row[0].toString();
+        for (Data.Row row : data) {
+            String rowString = row.get(1).toString();
             departureList.getItems().add(rowString);
         }
 
         Data data1 = Main.getInstance().getDataBaseManager().getColumnFromTable("destination", "routes");
-        for (Object[] row : data1) {
-            String rowString = row[0].toString();
+        for (Data.Row row : data1) {
+            String rowString = row.get(1).toString();
             destinationList.getItems().add(rowString);
         }
 
@@ -68,12 +75,14 @@ public class Controller {
         String departureSelected = departureList.getValue().toString();
         String destinationSelected = destinationList.getValue().toString();
 
-        Data result = Main.getInstance().getDataBaseManager().selectWhereColumnEqualsJoinTables("routes",
-                "departure", "destination", "route_id", "departures",
+        Data result = Main.getInstance().getDeparturesManager().getDepartureTimesForRoute(
                 departureSelected, destinationSelected);
 
-        for (Object[] row : result) {
-            String rowString = row[0].toString();
+        int dateColIdx = result.getColumnIndex("departure_date");
+        int timeColIdx =result.getColumnIndex("departure_time");
+
+        for (Data.Row row : result) {
+            String rowString = row.get(dateColIdx).toString() + " " + row.get(timeColIdx).toString();
             preselectedBusesList.getItems().add(rowString);
         }
 
@@ -89,21 +98,22 @@ public class Controller {
         departureList.getSelectionModel().clearSelection();
         destinationList.getSelectionModel().clearSelection();
         dateTextField.clear();
-        preselectedBusesList.getSelectionModel().clearSelection();
+        preselectedBusesList.getItems().clear();
         departureTimeTextField.clear();
     }
 
     public void onBookBusButtonClicked() {
+        //czary-mary
     }
 
     public void onButtonAddBusClicked() {
 
         try {
             Main.getInstance().getDataBaseManager().insertObjectsIntoTable("routes", null,
-                    departureTextField.getText(), destinationTextField.getText(), 1000,
+                    departureTextField.getText(), destinationTextField.getText(), null,
                     Integer.parseInt(busNoTextField.getText()));
 
-            alertDialog = new AlertDialog("New route created!");
+            AlertDialog.show("New route created!");
 
         } catch (SQLException e) {
             e.printStackTrace();

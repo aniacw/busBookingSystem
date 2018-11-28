@@ -53,9 +53,11 @@ public class LoginManager {
         grid.setPadding(new Insets(20, 150, 10, 10));
 
         TextField username = new TextField();
-        username.setPromptText("Username");
+        username.setText("x");
+        //username.setPromptText("Username");
         PasswordField password = new PasswordField();
-        password.setPromptText("Password");
+        //password.setPromptText("Password");
+        password.setText("w");
 
         grid.add(new Label("Username:"), 0, 0);
         grid.add(username, 1, 0);
@@ -64,7 +66,7 @@ public class LoginManager {
 
 // Enable/Disable login button depending on whether a username was entered.
         Node loginButton = dialog.getDialogPane().lookupButton(ButtonType.OK);
-        loginButton.setDisable(true);
+        //loginButton.setDisable(true); //to ostatecznie przywrócić
 
 // Do some validation (using the Java 8 lambda syntax).
         username.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -116,7 +118,7 @@ public class LoginManager {
     public boolean verifyCredentials(String userName, String password) {
 
         try {
-            Data data = manager.selectWhereColumnEqualsString("users", "login", userName);
+            Data data = manager.selectWhereColumnEquals("users", "login", userName);
             if (data.isEmpty())
                 return false;
             String dbPassword = data.getFromTopRow(3);

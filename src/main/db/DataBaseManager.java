@@ -38,13 +38,7 @@ public class DataBaseManager {
             for (int i = 1; i < values.length; ++i) {
                 Object v = values[i];
                 builder.append(',');
-                if (v instanceof String) {
-                    builder.append('\'');
-                    builder.append(values[i]); //*******
-                    builder.append('\'');
-                } else {
-                    builder.append(values[i]);
-                }
+                builder.append(objectToString(values[i]));
             }
         }
 
@@ -87,7 +81,7 @@ public class DataBaseManager {
         return new Data(statement.executeQuery(getData.toString()));
     }
 
-    public Data selectWhereColumnEquals(String table, String column, String value) throws SQLException {
+    public Data selectWhereColumnEquals(String table, String column, Object value) throws SQLException {
         StringBuilder getData = new StringBuilder();
         getData
                 .append("SELECT * FROM ")
@@ -95,13 +89,13 @@ public class DataBaseManager {
                 .append(" WHERE ")
                 .append(column)
                 .append(" = ")
-                .append(value);
+                .append(objectToString(value));
         return new Data(statement.executeQuery(getData.toString()));
     }
 
     public Data selectWhereColumnEqualsJoinTables(String table1, String column1, String column2,
-                                                  String primaryKey, String table2,
-                                                  String selectFromColumn1, String selectFromColumn2) throws SQLException {
+                                                  Object primaryKey, String table2,
+                                                  Object selectFromColumn1, Object selectFromColumn2) throws SQLException {
         StringBuilder getData = new StringBuilder();
         getData
                 .append("SELECT * FROM ")
@@ -121,13 +115,13 @@ public class DataBaseManager {
                 .append(".")
                 .append(column1)
                 .append(" = ")
-                .append(selectFromColumn1)
+                .append(objectToString(selectFromColumn1))
                 .append(" AND ")
                 .append(table1)
                 .append(".")
                 .append(column2)
                 .append(" = ")
-                .append(selectFromColumn2);
+                .append(objectToString(selectFromColumn2));
         return new Data((statement.executeQuery(getData.toString())));
 
         //SELECT * FROM routes
@@ -135,10 +129,6 @@ public class DataBaseManager {
         //ON routes.route_id = departures.route_id
         //WHERE routes.departure = city1
         //AND routes.destination = city2;
-    }
-
-    public Data selectWhereColumnEqualsString(String table, String column, String value) throws SQLException {
-        return selectWhereColumnEquals(table, column, "'" + value + "'");
     }
 
     public Data getTable(String table) throws SQLException {
@@ -149,8 +139,15 @@ public class DataBaseManager {
         return new Data(statement.executeQuery(getData.toString()));
     }
 
-    boolean isConnected() {
+    public boolean isConnected() {
         return connection != null;
+    }
+
+    private static String objectToString(Object o){
+        if (o instanceof String || o instanceof Date)
+            return '\'' + o.toString() + '\'';
+        else
+            return o.toString();
     }
 
 }

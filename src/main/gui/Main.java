@@ -9,6 +9,7 @@ import javafx.util.Pair;
 import main.db.DataBaseManager;
 import main.LoginManager;
 import main.db.CSVLoader;
+import main.db.DeparturesManager;
 
 public class Main extends Application {
     private static Main instance = null;
@@ -19,6 +20,12 @@ public class Main extends Application {
 
     private DataBaseManager dataBaseManager;
     private LoginManager loginManager;
+    private DeparturesManager departuresManager;
+
+    public DeparturesManager getDeparturesManager() {
+        return departuresManager;
+    }
+
 
     public DataBaseManager getDataBaseManager() {
         return dataBaseManager;
@@ -35,7 +42,6 @@ public class Main extends Application {
         instance = this;
 
         dataBaseManager.connect("busschedule", "root", "123456");
-        LoginManager loginManager = new LoginManager(dataBaseManager);
         CSVLoader csvLoader = new CSVLoader(dataBaseManager);
         //csvLoader.loadIntoTable("C:\\Users\\Ania\\Desktop\\BUS.csv", "USERS");
         //csvLoader.loadIntoTable("C:\\Users\\Ania\\Desktop\\Routes.csv", "routes");
