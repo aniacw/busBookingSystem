@@ -27,6 +27,7 @@ public class Data implements Iterable<Data.Row> {
     private String[] columnNames;
     private int columns;
 
+
     private void initialize(ResultSet resultSet) throws SQLException {
         ResultSetMetaData meta = resultSet.getMetaData();
         columns = meta.getColumnCount();

@@ -1,5 +1,7 @@
 package main.gui;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,6 +12,9 @@ import main.db.DataBaseManager;
 import main.LoginManager;
 import main.db.CSVLoader;
 import main.db.DeparturesManager;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 public class Main extends Application {
     private static Main instance = null;
@@ -128,6 +133,19 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+//        try {
+//            Document document = new Document();
+//            PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\Ania\\Desktop\\iTextHelloWorld.pdf"));
+//
+//            document.open();
+//            Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+//            Chunk chunk = new Chunk("Hello World", font);
+//
+//            document.add(chunk);
+//            document.close();
+//        } catch (DocumentException | FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
         launch(args);
     }
 }
