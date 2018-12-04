@@ -66,8 +66,8 @@ public class DataBaseManager {
                 .append("INSERT INTO ")
                 .append(tableName)
                 .append(" VALUES(")
-                .append(row);
-                //.append(')');
+                .append(row)
+                .append(')');
         statement.executeUpdate(builder.toString());
     }
 
@@ -91,6 +91,34 @@ public class DataBaseManager {
                 .append(" = ")
                 .append(objectToString(value));
         return new Data(statement.executeQuery(getData.toString()));
+    }
+
+    public void removeWhereColumnEquals(String table, String column, Object value) throws SQLException {
+        StringBuilder deleteData = new StringBuilder();
+        deleteData
+                .append("DELETE FROM ")
+                .append(table)
+                .append(" WHERE ")
+                .append(column)
+                .append(" = ")
+                .append(objectToString(value));
+       statement.executeUpdate(deleteData.toString());
+    }
+
+    public void removeWhereTwoColumnEquals(String table, String column1, String column2, Object value1, Object value2) throws SQLException {
+        StringBuilder deleteData = new StringBuilder();
+        deleteData
+                .append("DELETE FROM ")
+                .append(table)
+                .append(" WHERE ")
+                .append(column1)
+                .append(" = ")
+                .append(objectToString(value1))
+                .append(" AND ")
+                .append(column2)
+                .append(" = ")
+                .append(objectToString(value2));
+        statement.executeUpdate(deleteData.toString());
     }
 
     public Data selectWhereColumnEqualsJoinTables(String table1, String column1, String column2,
@@ -124,11 +152,33 @@ public class DataBaseManager {
                 .append(objectToString(selectFromColumn2));
         return new Data((statement.executeQuery(getData.toString())));
 
-        //SELECT * FROM routes
-        //INNER JOIN departures
-        //ON routes.route_id = departures.route_id
-        //WHERE routes.departure = city1
-        //AND routes.destination = city2;
+    }
+
+    public Data selectWhereColumnEqualsJoinTables2(String table1, String column1,
+                                                   Object primaryKey, String table2,
+                                                   Object selectFromColumn1) throws SQLException {
+        StringBuilder getData = new StringBuilder();
+        getData
+                .append("SELECT * FROM ")
+                .append(table1)
+                .append(" INNER JOIN ")
+                .append(table2)
+                .append(" ON ")
+                .append(table1)
+                .append(".")
+                .append(primaryKey)
+                .append(" = ")
+                .append(table2)
+                .append(".")
+                .append(primaryKey)
+                .append(" WHERE ")
+                .append(table1)
+                .append(".")
+                .append(column1)
+                .append(" = ")
+                .append(objectToString(selectFromColumn1));
+        return new Data((statement.executeQuery(getData.toString())));
+
     }
 
     public Data getTable(String table) throws SQLException {
@@ -143,7 +193,7 @@ public class DataBaseManager {
         return connection != null;
     }
 
-    private static String objectToString(Object o){
+    private static String objectToString(Object o) {
         if (o instanceof String || o instanceof Date)
             return '\'' + o.toString() + '\'';
         else

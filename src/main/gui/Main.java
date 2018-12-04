@@ -8,10 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
-import main.db.DataBaseManager;
+import main.db.*;
 import main.LoginManager;
-import main.db.CSVLoader;
-import main.db.DeparturesManager;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -26,11 +24,16 @@ public class Main extends Application {
     private DataBaseManager dataBaseManager;
     private LoginManager loginManager;
     private DeparturesManager departuresManager;
+    private UsersManager usersManager;
+    private RoutesManager routesManager;
+
+    public RoutesManager getRoutesManager() {
+        return routesManager;
+    }
 
     public DeparturesManager getDeparturesManager() {
         return departuresManager;
     }
-
 
     public DataBaseManager getDataBaseManager() {
         return dataBaseManager;
@@ -40,10 +43,17 @@ public class Main extends Application {
         return loginManager;
     }
 
+    public UsersManager getUsersManager() {
+        return usersManager;
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         dataBaseManager = new DataBaseManager();
         loginManager = new LoginManager(dataBaseManager);
+        routesManager = new RoutesManager(dataBaseManager);
+        departuresManager = new DeparturesManager(dataBaseManager);
+        usersManager = new UsersManager(dataBaseManager);
         instance = this;
 
         dataBaseManager.connect("busschedule", "root", "123456");
@@ -123,11 +133,6 @@ public class Main extends Application {
 //            }
 //        }
 
-//        Pane root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
-//        primaryStage.setTitle("Hello World");
-//        primaryStage.setScene(new Scene(root, 900, 500));
-//        primaryStage.show();
-
 
     }
 
@@ -148,4 +153,5 @@ public class Main extends Application {
 //        }
         launch(args);
     }
+
 }

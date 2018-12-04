@@ -7,19 +7,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Data implements Iterable<Data.Row> {
-    public static class Row{
+    public static class Row {
         private Object[] data;
 
-        private Row(int size){
-            this.data=new Object[size];
+        private Row(int size) {
+            this.data = new Object[size];
         }
 
         private Row(Object[] data) {
             this.data = data;
         }
 
-        public Object get(int i){
-            return data[i-1];
+        public Object get(int i) {
+            return data[i - 1];
         }
     }
 
@@ -27,13 +27,12 @@ public class Data implements Iterable<Data.Row> {
     private String[] columnNames;
     private int columns;
 
-
     private void initialize(ResultSet resultSet) throws SQLException {
         ResultSetMetaData meta = resultSet.getMetaData();
         columns = meta.getColumnCount();
-        columnNames=new String[columns];
-        for (int i=0;i<columns;++i)
-            columnNames[i]=meta.getColumnName(i+1);
+        columnNames = new String[columns];
+        for (int i = 0; i < columns; ++i)
+            columnNames[i] = meta.getColumnName(i + 1);
         while (resultSet.next()) {
             Row row = new Row(columns); //row odpowiada za 1 rzad
             for (int i = 0; i < columns; ++i)
@@ -55,11 +54,11 @@ public class Data implements Iterable<Data.Row> {
 //        Object[] r = data.get(row-1);
 //        return (T)r[column-1];
 
-        return (T) data.get(row - 1).data[column-1];
+        return (T) data.get(row - 1).data[column - 1];
     }
 
     public <T> T getFromTopRow(int column) {
-        return (T) data.get(0).data[column-1];
+        return (T) data.get(0).data[column - 1];
     }
 
     public Row getRow(int row) {
@@ -98,12 +97,12 @@ public class Data implements Iterable<Data.Row> {
                 '}';
     }
 
-    public String getColumnName(int col){
+    public String getColumnName(int col) {
         return columnNames[col];
     }
 
     public int getColumnIndex(String columnName) throws IllegalArgumentException {
-        for (int i=0;i<columns;++i){
+        for (int i = 0; i < columns; ++i) {
             if (columnNames[i].equalsIgnoreCase(columnName))
                 return i + 1;
         }

@@ -8,4 +8,17 @@ public class Admin extends User {
 
     public Admin() {
     }
+
+    public void createNewUser(String login, String tempPassword, String access) {
+        switch (access) {
+            case "client":
+                User newClient = new Client(login, tempPassword, "client");
+                break;
+            case "admin":
+                User newAdmin = new Admin(login, tempPassword, "admin");
+                break;
+        }
+    }
+
+
 }

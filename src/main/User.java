@@ -27,4 +27,7 @@ public class User {
     public String getAccess() {
         return access;
     }
+
+    public void createNewUser(String login, String tempPassword, String access) {
+    }
 }

@@ -42,7 +42,6 @@ public class LoginManager {
         dialog.setTitle("System login");
         dialog.setHeaderText("Please type in your login and password");
 
-
 // Set the button types.
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
@@ -76,7 +75,6 @@ public class LoginManager {
         password.textProperty().addListener((observable, oldValue, newValue) -> {
             loginButton.setDisable(newValue.trim().isEmpty());
         });
-
 
         dialog.getDialogPane().setContent(grid);
         dialog.setResultConverter(

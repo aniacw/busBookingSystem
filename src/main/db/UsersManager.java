@@ -1,0 +1,24 @@
+package main.db;
+
+import java.sql.SQLException;
+
+public class UsersManager {
+    private DataBaseManager manager;
+
+    public UsersManager(DataBaseManager manager) {
+        this.manager = manager;
+    }
+
+    public Data getOrdersForUser(String login) throws SQLException {
+        return manager.selectWhereColumnEqualsJoinTables2("users", "login", "login",
+                "bookings", login);
+    }
+
+    public void addNewUser(String login, String password, String access) throws SQLException {
+        manager.insertObjectsIntoTable("users", null, login, password, access);
+    }
+
+    public void removeUser(String login) throws SQLException {
+        manager.removeWhereColumnEquals("users", "login", login);
+    }
+}
