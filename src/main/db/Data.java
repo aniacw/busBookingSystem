@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class Data implements Iterable<Data.Row> {
@@ -20,6 +21,11 @@ public class Data implements Iterable<Data.Row> {
 
         public Object get(int i) {
             return data[i - 1];
+        }
+
+        @Override
+        public String toString(){
+            return Arrays.toString(data);
         }
     }
 
@@ -107,5 +113,14 @@ public class Data implements Iterable<Data.Row> {
                 return i + 1;
         }
         throw new IllegalArgumentException("Column not found");
+    }
+
+
+    public void process(DataProcessor processor){
+        for (int r = 0; r<data.size(); ++r){
+            for (int c = 1; c <= columns; ++c){
+                processor.process(data.get(r).get(c), r+1, c);
+            }
+        }
     }
 }

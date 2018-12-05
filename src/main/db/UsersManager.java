@@ -10,8 +10,7 @@ public class UsersManager {
     }
 
     public Data getOrdersForUser(String login) throws SQLException {
-        return manager.selectWhereColumnEqualsJoinTables2("users", "login", "login",
-                "bookings", login);
+        return manager.selectWhereColumnEquals("bookings", "login", login);
     }
 
     public void addNewUser(String login, String password, String access) throws SQLException {

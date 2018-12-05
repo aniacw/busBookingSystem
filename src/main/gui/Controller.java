@@ -3,14 +3,13 @@ package main.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import main.Admin;
-import main.User;
+import javafx.util.StringConverter;
 import main.db.Data;
-import main.db.DataBaseManager;
+import main.db.DataProcessor;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Controller {
 
@@ -71,6 +70,12 @@ public class Controller {
     @FXML
     ListView<Object> ordersList;
 
+    @FXML
+    Label statusBar;
+
+    @FXML
+    DatePicker datePicker;
+
    // private User admin;
 
 
@@ -90,6 +95,30 @@ public class Controller {
             destinationList.getItems().add(rowString);
         }
 
+        datePicker.setConverter(new StringConverter<LocalDate>() {
+            String pattern = "yyyy-MM-dd";
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+            {
+                datePicker.setPromptText(pattern.toLowerCase());
+            }
+
+            @Override public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter.format(date);
+                } else {
+                    return "";
+                }
+            }
+
+            @Override public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter);
+                } else {
+                    return null;
+                }
+            }
+        });
+
     }
 
     public void accessTabs() {
@@ -97,19 +126,23 @@ public class Controller {
             mainTabPanel.getTabs().removeAll(busManagement, adminPanel);
     }
 
-    public void onGetBusDetailsButtonClicked() throws SQLException {
+    public void onGetBusDetailsButtonClicked() {
         String departureSelected = departureList.getValue().toString();
         String destinationSelected = destinationList.getValue().toString();
+        try {
+            Data result = Main.getInstance().getDeparturesManager().getDepartureTimesForRoute(
+                    departureSelected, destinationSelected);
 
-        Data result = Main.getInstance().getDeparturesManager().getDepartureTimesForRoute(
-                departureSelected, destinationSelected);
+            int dateColIdx = result.getColumnIndex("departure_date");
+            int timeColIdx = result.getColumnIndex("departure_time");
 
-        int dateColIdx = result.getColumnIndex("departure_date");
-        int timeColIdx = result.getColumnIndex("departure_time");
-
-        for (Data.Row row : result) {
-            String rowString = row.get(dateColIdx).toString() + " " + row.get(timeColIdx).toString();
-            preselectedBusesList.getItems().add(rowString);
+            for (Data.Row row : result) {
+                String rowString = row.get(dateColIdx).toString() + " " + row.get(timeColIdx).toString();
+                preselectedBusesList.getItems().add(rowString);
+            }
+        }
+        catch (SQLException e){
+            statusBar.setText(e.getMessage());
         }
     }
 
@@ -143,23 +176,30 @@ public class Controller {
 
     public void onButtonRemoveBusClicked() {
 
-        String departure = departureTextField.getText();
-        String destination = destinationTextField.getText();
-        String routeId = routeIdTextField.getText();
+        String departure = departureTextField.getText().trim();
+        String destination = destinationTextField.getText().trim();
+        String routeId = routeIdTextField.getText().trim();
 
-        if(departureTextField.getText() != null && destinationTextField.getText() != null){
+        if(!departure.isEmpty() && !destination.isEmpty()){
             try {
                 AlertDialog.show("Are you sure?", Alert.AlertType.CONFIRMATION);
-                Main.getInstance().getRoutesManager().removeRoute(departure, destination);
-                AlertDialog.show("Bus deleted!");
+                if (Main.getInstance().getRoutesManager().removeRoute(departure, destination)){
+                    statusBar.setText("Route removed successfully");
+                }else{
+                    statusBar.setText("Route with given parameters does not exist");
+                }
+                //AlertDialog.show("Bus deleted!");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        } else if (routeIdTextField.getText() != null) {
+        } else if (!routeId.isEmpty()) {
             try {
                 AlertDialog.show("Are you sure?", Alert.AlertType.CONFIRMATION);
-                Main.getInstance().getRoutesManager().removeRouteById(routeId);
-                AlertDialog.show("Bus deleted!");
+                if (Main.getInstance().getRoutesManager().removeRouteById(routeId)){
+                    statusBar.setText("Route removed successfully");
+                }else{
+                    statusBar.setText("Route with given parameters does not exist");
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -167,29 +207,31 @@ public class Controller {
     }
 
     public void onButtonAddNewUserButtonClicked() {
-//        String login = loginTextField.getText();
-//        String tempPassword = tempPassTextField.getText();
-//        String access = accessTextField.getText();
-//
-//        admin = new Admin();
-//        admin.createNewUser(login, tempPassword, access);
-//
-//        try {
-//            Main.getInstance().getUsersManager().addNewUser(login, tempPassword, access);
-//            AlertDialog.show("User added", Alert.AlertType.INFORMATION);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        String login = loginTextField.getText();
+        String tempPassword = tempPassTextField.getText();
+        String access = accessTextField.getText();
+
+        if (Main.getInstance().getLoginManager().getLoggedUser().getAccess().equals("admin")){
+            try {
+                Main.getInstance().getUsersManager().addNewUser(login, tempPassword, access);
+                statusBar.setText("User added");
+            } catch (SQLException e) {
+                AlertDialog.show(e.getMessage());
+                statusBar.setText(e.getMessage());
+            }
+
+        }
     }
 
     public void onButtonRemoveUserClicked() {
         String login = loginToRemoveTextField.getText();
-
-        try {
-            Main.getInstance().getUsersManager().removeUser(login);
-            AlertDialog.show("User deleted", Alert.AlertType.CONFIRMATION);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (Main.getInstance().getLoginManager().getLoggedUser().getAccess().equals("admin")) {
+            try {
+                Main.getInstance().getUsersManager().removeUser(login);
+                statusBar.setText("User deleted");
+            } catch (SQLException e) {
+                statusBar.setText(e.getMessage());
+            }
         }
     }
 
@@ -205,6 +247,8 @@ public class Controller {
             userIdTextField.setText(result.get(1, userIdColIdx).toString());
 
             Data ordersResult = Main.getInstance().getUsersManager().getOrdersForUser(login);
+
+            //ordersResult.process((o, row, column) -> System.out.println(o + " " + row + " " + column));
 
             for (Data.Row order : ordersResult) {
                 String orderResult = order.toString();

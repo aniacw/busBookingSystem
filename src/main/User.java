@@ -28,6 +28,4 @@ public class User {
         return access;
     }
 
-    public void createNewUser(String login, String tempPassword, String access) {
-    }
 }

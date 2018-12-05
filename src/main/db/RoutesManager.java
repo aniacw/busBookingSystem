@@ -26,11 +26,11 @@ public class RoutesManager {
         manager.insertObjectsIntoTable("routes", null, departure, destination, 1, busNo);
     }
 
-    public void removeRoute(String departure, String destination) throws SQLException {
-        manager.removeWhereTwoColumnEquals("routes", "departure", "destination", departure, destination);
+    public boolean removeRoute(String departure, String destination) throws SQLException {
+        return manager.removeWhereTwoColumnEquals("routes", "departure", "destination", departure, destination) > 0;
     }
 
-    public void removeRouteById(String id) throws SQLException {
-        manager.removeWhereColumnEquals("routes", "route_id", id);
+    public boolean removeRouteById(String id) throws SQLException {
+        return manager.removeWhereColumnEquals("routes", "route_id", id) > 0;
     }
 }

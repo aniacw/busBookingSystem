@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class DataBaseManager {
+    private String database;
+    private String login;
+    private String password;
     private Connection connection;
     private Statement statement;
     private Driver driver;
@@ -17,6 +20,9 @@ public class DataBaseManager {
                         DriverManager.getConnection(
                                 "jdbc:mysql://localhost:3306/" + database + "?user=" + login + "&password=" + password);
                 statement = connection.createStatement();
+                this.database=database;
+                this.login=login;
+                this.password = password;
                 return true;
             } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
                 return false;
@@ -25,11 +31,26 @@ public class DataBaseManager {
             return true;
     }
 
+    private boolean validateConnection(){
+        try {
+            if (connection.isClosed() || statement.isClosed()){
+                connection =
+                        DriverManager.getConnection(
+                                "jdbc:mysql://localhost:3306/" + database + "?user=" + login + "&password=" + password);
+                statement = connection.createStatement();
+            }
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
     public Connection getConnection() {
         return connection;
     }
 
     public void insertObjectsIntoTable(String tableName, Object... values) throws SQLException {
+        validateConnection();
         StringBuilder builder = new StringBuilder();
         builder.append("INSERT INTO " + tableName + " VALUES (");
 
@@ -93,7 +114,7 @@ public class DataBaseManager {
         return new Data(statement.executeQuery(getData.toString()));
     }
 
-    public void removeWhereColumnEquals(String table, String column, Object value) throws SQLException {
+    public int removeWhereColumnEquals(String table, String column, Object value) throws SQLException {
         StringBuilder deleteData = new StringBuilder();
         deleteData
                 .append("DELETE FROM ")
@@ -102,10 +123,10 @@ public class DataBaseManager {
                 .append(column)
                 .append(" = ")
                 .append(objectToString(value));
-       statement.executeUpdate(deleteData.toString());
+       return statement.executeUpdate(deleteData.toString());
     }
 
-    public void removeWhereTwoColumnEquals(String table, String column1, String column2, Object value1, Object value2) throws SQLException {
+    public int removeWhereTwoColumnEquals(String table, String column1, String column2, Object value1, Object value2) throws SQLException {
         StringBuilder deleteData = new StringBuilder();
         deleteData
                 .append("DELETE FROM ")
@@ -118,7 +139,7 @@ public class DataBaseManager {
                 .append(column2)
                 .append(" = ")
                 .append(objectToString(value2));
-        statement.executeUpdate(deleteData.toString());
+        return statement.executeUpdate(deleteData.toString());
     }
 
     public Data selectWhereColumnEqualsJoinTables(String table1, String column1, String column2,

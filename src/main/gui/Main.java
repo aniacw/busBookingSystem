@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import main.PasswordEncryptor;
 import main.db.*;
 import main.LoginManager;
 
@@ -152,6 +153,7 @@ public class Main extends Application {
 //            e.printStackTrace();
 //        }
         launch(args);
+        //System.out.println(PasswordEncryptor.encrypt("alamakota"));
     }
 
 }

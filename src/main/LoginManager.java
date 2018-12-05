@@ -1,6 +1,8 @@
 package main;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -22,6 +24,21 @@ public class LoginManager {
     private DataBaseManager manager;
     private String dbAccess;
     private SimpleDateFormat currentTime;
+
+    private static class Listener implements ChangeListener<String>
+    {
+        private Node loginButton;
+
+        public Listener(Node loginButton) {
+            this.loginButton = loginButton;
+        }
+
+        @Override
+        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            loginButton.setDisable(newValue.trim().isEmpty());
+        }
+    }
+
 
     public boolean userExists(String username) {
         return false;
@@ -68,9 +85,19 @@ public class LoginManager {
         //loginButton.setDisable(true); //to ostatecznie przywrócić
 
 // Do some validation (using the Java 8 lambda syntax).
-        username.textProperty().addListener((observable, oldValue, newValue) -> {
-            loginButton.setDisable(newValue.trim().isEmpty());
-        });
+//        username.textProperty().addListener((observable, oldValue, newValue) -> {
+//            loginButton.setDisable(newValue.trim().isEmpty());
+//        });
+
+//        username.textProperty().addListener(new ChangeListener<String>() {
+//            @Override
+//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//                loginButton.setDisable(newValue.trim().isEmpty());
+//            }
+//        });
+
+        username.textProperty().addListener(new Listener(loginButton));
+
 
         password.textProperty().addListener((observable, oldValue, newValue) -> {
             loginButton.setDisable(newValue.trim().isEmpty());
@@ -122,14 +149,8 @@ public class LoginManager {
             String dbPassword = data.getFromTopRow(3);
             dbAccess = data.getFromTopRow(4);
             if (dbPassword.equals(password)) {
-                if (dbAccess.equals("admin")) {
-                    loggedUser = new Admin(userName, password, dbAccess);
-                    return true;
-                } else if (dbAccess.equals("client")) {
-                    loggedUser = new Client(userName, password, dbAccess);
-                    return true;
-                } else
-                    return false; //wyrzucic jakis sensowny wyjatek (?)
+                loggedUser = new User(userName, password, dbAccess);
+                return true;
             } else
                 return false;
         } catch (SQLException e) {
