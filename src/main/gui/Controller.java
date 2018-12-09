@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.StringConverter;
+import main.FareCalculator;
 import main.db.Data;
 import main.db.DataProcessor;
 
@@ -17,7 +18,6 @@ public class Controller {
     Tab
             reservation,
             busManagement,
-            fareCalculator,
             adminPanel,
             tickets;
 
@@ -33,6 +33,7 @@ public class Controller {
     @FXML
     TextField
             departureId,
+            priceTextField,
             routeIdTextField,
             date,
             dateTextField,
@@ -46,6 +47,7 @@ public class Controller {
             accessTextFieldDisplayData,
             userIdTextField,
             loginToRemoveTextField,
+            nameTextField,
             loginTextField;
 
     @FXML
@@ -54,8 +56,6 @@ public class Controller {
             resetButton,
             addBusButton,
             removeBusButton,
-            fetchDataButton,
-            updateDataButton,
             bookBusButton,
             removeUserButton,
             displayUserDataButton,
@@ -75,8 +75,6 @@ public class Controller {
 
     @FXML
     DatePicker datePicker;
-
-   // private User admin;
 
 
     @FXML
@@ -98,11 +96,13 @@ public class Controller {
         datePicker.setConverter(new StringConverter<LocalDate>() {
             String pattern = "yyyy-MM-dd";
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
             {
                 datePicker.setPromptText(pattern.toLowerCase());
             }
 
-            @Override public String toString(LocalDate date) {
+            @Override
+            public String toString(LocalDate date) {
                 if (date != null) {
                     return dateFormatter.format(date);
                 } else {
@@ -110,7 +110,8 @@ public class Controller {
                 }
             }
 
-            @Override public LocalDate fromString(String string) {
+            @Override
+            public LocalDate fromString(String string) {
                 if (string != null && !string.isEmpty()) {
                     return LocalDate.parse(string, dateFormatter);
                 } else {
@@ -140,8 +141,7 @@ public class Controller {
                 String rowString = row.get(dateColIdx).toString() + " " + row.get(timeColIdx).toString();
                 preselectedBusesList.getItems().add(rowString);
             }
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             statusBar.setText(e.getMessage());
         }
     }
@@ -152,10 +152,6 @@ public class Controller {
         dateTextField.clear();
         preselectedBusesList.getItems().clear();
         departureTimeTextField.clear();
-    }
-
-    public void onBookBusButtonClicked() {
-        //czary-mary
     }
 
     public void onButtonAddBusClicked() {
@@ -180,12 +176,12 @@ public class Controller {
         String destination = destinationTextField.getText().trim();
         String routeId = routeIdTextField.getText().trim();
 
-        if(!departure.isEmpty() && !destination.isEmpty()){
+        if (!departure.isEmpty() && !destination.isEmpty()) {
             try {
                 AlertDialog.show("Are you sure?", Alert.AlertType.CONFIRMATION);
-                if (Main.getInstance().getRoutesManager().removeRoute(departure, destination)){
+                if (Main.getInstance().getRoutesManager().removeRoute(departure, destination)) {
                     statusBar.setText("Route removed successfully");
-                }else{
+                } else {
                     statusBar.setText("Route with given parameters does not exist");
                 }
                 //AlertDialog.show("Bus deleted!");
@@ -195,9 +191,9 @@ public class Controller {
         } else if (!routeId.isEmpty()) {
             try {
                 AlertDialog.show("Are you sure?", Alert.AlertType.CONFIRMATION);
-                if (Main.getInstance().getRoutesManager().removeRouteById(routeId)){
+                if (Main.getInstance().getRoutesManager().removeRouteById(routeId)) {
                     statusBar.setText("Route removed successfully");
-                }else{
+                } else {
                     statusBar.setText("Route with given parameters does not exist");
                 }
             } catch (SQLException e) {
@@ -211,7 +207,7 @@ public class Controller {
         String tempPassword = tempPassTextField.getText();
         String access = accessTextField.getText();
 
-        if (Main.getInstance().getLoginManager().getLoggedUser().getAccess().equals("admin")){
+        if (Main.getInstance().getLoginManager().getLoggedUser().getAccess().equals("admin")) {
             try {
                 Main.getInstance().getUsersManager().addNewUser(login, tempPassword, access);
                 statusBar.setText("User added");
@@ -254,6 +250,56 @@ public class Controller {
                 String orderResult = order.toString();
                 ordersList.getItems().add(orderResult);
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onButtonBookBusClicked() {
+        String name = nameTextField.getText();
+        String departureSelected = departureList.getValue().toString();
+        String destinationSelected = destinationList.getValue().toString();
+        String date = "";
+        String time = "";
+        Integer routeIdSelected = null;
+        Integer departureIdSelected = null;
+        Integer distanceSelected = null;
+
+        try {
+            Data result = Main.getInstance().getDeparturesManager().getDepartureTimesForRoute(
+                    departureSelected, destinationSelected);
+
+            int dateColIdx = result.getColumnIndex("departure_date");
+            int timeColIdx = result.getColumnIndex("departure_time");
+
+            for (Data.Row row : result) {
+                date = row.get(dateColIdx).toString();
+                time = row.get(timeColIdx).toString();
+            }
+
+            Data departuteIdResult = Main.getInstance().getDeparturesManager().getDeparturesIdOnDateTime(
+                    date, time);
+
+            for (Data.Row row : departuteIdResult)
+                departureIdSelected = Integer.parseInt(row.toString());
+
+            Data route = Main.getInstance().getRoutesManager().getRoute(departureSelected, destinationSelected);
+
+            for (Data.Row row : route)
+                routeIdSelected = Integer.parseInt(row.toString());
+
+            Data distanceRsult = Main.getInstance().getRoutesManager().getDistance(departureSelected, destinationSelected);
+
+            for (Data.Row row : distanceRsult)
+                distanceSelected = Integer.parseInt(row.toString());
+
+            FareCalculator.setOneKmCharge(0.80);
+            double fare = FareCalculator.calculateFare(FareCalculator.getOneKmCharge(), distanceSelected);
+
+            Main.getInstance().getBookingsManager().addOrder(name, routeIdSelected, departureIdSelected, fare,
+                    Main.getInstance().getLoginManager().getLoggedUser().toString());
+
 
         } catch (SQLException e) {
             e.printStackTrace();

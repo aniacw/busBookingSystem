@@ -175,31 +175,24 @@ public class DataBaseManager {
 
     }
 
-    public Data selectWhereColumnEqualsJoinTables2(String table1, String column1,
-                                                   Object primaryKey, String table2,
-                                                   Object selectFromColumn1) throws SQLException {
+    public Data selectWhereColumnEquals2(String table, String column1, String selectedValue1,
+                                         String selectedColumn, String selectedValue2,
+                                         String column2) throws SQLException {
         StringBuilder getData = new StringBuilder();
         getData
-                .append("SELECT * FROM ")
-                .append(table1)
-                .append(" INNER JOIN ")
-                .append(table2)
-                .append(" ON ")
-                .append(table1)
-                .append(".")
-                .append(primaryKey)
-                .append(" = ")
-                .append(table2)
-                .append(".")
-                .append(primaryKey)
+                .append("SELECT ")
+                .append(selectedColumn)
+                .append(" FROM ")
+                .append(table)
                 .append(" WHERE ")
-                .append(table1)
-                .append(".")
                 .append(column1)
                 .append(" = ")
-                .append(objectToString(selectFromColumn1));
+                .append(objectToString(selectedValue1))
+                .append(" AND ")
+                .append(column2)
+                .append(" = ")
+                .append(objectToString(selectedValue2));
         return new Data((statement.executeQuery(getData.toString())));
-
     }
 
     public Data getTable(String table) throws SQLException {

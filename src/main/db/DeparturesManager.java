@@ -13,8 +13,9 @@ public class DeparturesManager {
         return manager.getTable("departures");
     }
 
-    public Data getDeparturesOnDate(String date) throws SQLException{
-        return manager.selectWhereColumnEquals("departures", "departure_date", date);
+    public Data getDeparturesIdOnDateTime(String date, String time) throws SQLException {
+        return manager.selectWhereColumnEquals2("departures", "departure_date", date,
+                "departureId", time, "departure_time");
     }
 
     public Data getDepartureTimesForRoute(String departure, String destination) throws SQLException {
@@ -22,4 +23,6 @@ public class DeparturesManager {
                 "departure", "destination", "route_id", "departures",
                 departure, destination);
     }
+
+
 }

@@ -27,6 +27,11 @@ public class Main extends Application {
     private DeparturesManager departuresManager;
     private UsersManager usersManager;
     private RoutesManager routesManager;
+    private BookingsManager bookingsManager;
+
+    public BookingsManager getBookingsManager() {
+        return bookingsManager;
+    }
 
     public RoutesManager getRoutesManager() {
         return routesManager;

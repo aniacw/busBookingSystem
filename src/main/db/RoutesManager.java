@@ -27,10 +27,21 @@ public class RoutesManager {
     }
 
     public boolean removeRoute(String departure, String destination) throws SQLException {
-        return manager.removeWhereTwoColumnEquals("routes", "departure", "destination", departure, destination) > 0;
+        return manager.removeWhereTwoColumnEquals("routes", "departure", "destination",
+                departure, destination) > 0;
     }
 
     public boolean removeRouteById(String id) throws SQLException {
         return manager.removeWhereColumnEquals("routes", "route_id", id) > 0;
+    }
+
+    public Data getRoute(String selectedDeparture, String selectedDestination) throws SQLException {
+        return manager.selectWhereColumnEquals2("routes", "departure", selectedDeparture,
+                "route_id", selectedDestination, "destination");
+    }
+
+    public Data getDistance(String selectedDeparture, String selectedDestination) throws SQLException {
+        return manager.selectWhereColumnEquals2("routes", "departure", selectedDeparture,
+                "distance", selectedDestination, "destination");
     }
 }
