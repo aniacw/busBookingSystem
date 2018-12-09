@@ -20,4 +20,8 @@ public class UsersManager {
     public void removeUser(String login) throws SQLException {
         manager.removeWhereColumnEquals("users", "login", login);
     }
+
+    public Data getPassword(String login) throws SQLException {
+        return manager.selectWhereColumnEqualsValueFromOtherColumn("users", "login", login, "user_password");
+    }
 }

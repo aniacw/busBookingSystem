@@ -15,7 +15,7 @@ public class DeparturesManager {
 
     public Data getDeparturesIdOnDateTime(String date, String time) throws SQLException {
         return manager.selectWhereColumnEquals2("departures", "departure_date", date,
-                "departureId", time, "departure_time");
+                "departure_id", time, "departure_time");
     }
 
     public Data getDepartureTimesForRoute(String departure, String destination) throws SQLException {

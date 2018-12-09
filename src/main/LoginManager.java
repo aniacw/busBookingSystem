@@ -157,45 +157,6 @@ public class LoginManager {
             e.printStackTrace();
         }
         return false;
-
-//        StringBuilder userPasswordCheck = new StringBuilder();
-//        userPasswordCheck
-//                .append("SELECT user_password FROM users WHERE login = '")
-//                .append(userName)
-//                .append("'");
-//
-//        try {
-//            // statement = manager.getConnection().createStatement();
-////            ResultSet resultSet = statement.executeQuery(userNameCheck.toString());
-////            if (resultSet.absolute(1)) {
-////                StringBuilder passwordCheck = new StringBuilder();
-////                passwordCheck
-////                        .append("SELECT user_password FROM users WHERE login = ")
-////                        .append(password);
-//
-//            statement = manager.getConnection().createStatement();
-//            ResultSet resultSet1 = statement.executeQuery(userPasswordCheck.toString());
-//            if (resultSet1.equals(password)) {
-//                StringBuilder accessType = new StringBuilder();
-//                accessType
-//                        .append("SELECT access FROM users WHERE login IN ('")
-//                        .append(userName)
-//                        .append("')");
-//                ResultSet resultSet2 = statement.executeQuery(accessType.toString());
-//
-//                if (resultSet2.equals("admin"))
-//                    loggedUser = new Admin();
-//                else if (resultSet2.equals("client"))
-//                    loggedUser = new Client();
-//                return true;
-//            }
-//            else
-//                return false;
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return false;
     }
 
     public String getDbAccess() {

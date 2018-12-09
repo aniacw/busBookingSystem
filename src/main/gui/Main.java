@@ -60,6 +60,7 @@ public class Main extends Application {
         routesManager = new RoutesManager(dataBaseManager);
         departuresManager = new DeparturesManager(dataBaseManager);
         usersManager = new UsersManager(dataBaseManager);
+        bookingsManager = new BookingsManager(dataBaseManager);
         instance = this;
 
         dataBaseManager.connect("busschedule", "root", "123456");

@@ -14,8 +14,10 @@ public class BookingsManager {
         manager.insertObjectsIntoTable("bookings", name, routeId, departureId, price, login);
     }
 
-    public void addOrder(String name, Integer routeIdSelected, Integer departureIdSelected, double fare,
+    public void addOrder(String name, String routeIdSelected, String departureIdSelected, double fare,
                          String login) throws SQLException {
         manager.insertObjectsIntoTable("bookings", name, routeIdSelected, departureIdSelected, fare, login);
     }
+
+
 }

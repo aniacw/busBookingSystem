@@ -9,8 +9,6 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -177,15 +175,7 @@
                                     </VBox>
                                  </children>
                               </GridPane>
-                              <TableView fx:id="busManagementTable" prefHeight="338.0" prefWidth="858.0" GridPane.rowIndex="1">
-                                <columns>
-                                  <TableColumn prefWidth="215.0" text="Bus ID" />
-                                  <TableColumn prefWidth="215.0" text="Bus Name" />
-                                    <TableColumn prefWidth="215.0" text="Originated From" />
-                                    <TableColumn prefWidth="213.0" text="Timing Form Source" />
-                                </columns>
-                              </TableView>
-                              <Label fx:id="statusBar" GridPane.rowIndex="2" />
+                              <Label fx:id="statusBar" prefHeight="21.0" prefWidth="858.0" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                      </children></AnchorPane>
@@ -321,7 +311,7 @@
                                     <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Button fx:id="onButtonBookBusClicked" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="52.0" prefWidth="201.0" text="Book Bus" textFill="#0abc4b" GridPane.columnIndex="2">
+                                    <Button fx:id="bookBusButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onButtonBookBusClicked" prefHeight="52.0" prefWidth="201.0" text="Book Bus" textFill="#0abc4b" GridPane.columnIndex="2">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
@@ -365,94 +355,6 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="adminPanel" text="Admin Panel">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="423.0" prefWidth="748.0">
-                     <children>
-                        <GridPane layoutX="1.0" layoutY="1.0" prefHeight="530.0" prefWidth="864.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="248.0" minHeight="0.0" prefHeight="42.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="332.0" minHeight="10.0" prefHeight="280.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="332.0" minHeight="10.0" prefHeight="132.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Button fx:id="addNewUserButton" mnemonicParsing="false" onAction="#onButtonAddNewUserButtonClicked" text="Add new User" />
-                              <Button fx:id="removeUserButton" mnemonicParsing="false" onAction="#onButtonRemoveUserClicked" text="Remove User" GridPane.columnIndex="1" />
-                              <Button fx:id="displayUserDataButton" mnemonicParsing="false" onAction="#onButtonDisplayUsersDataClicked" text="Display user's data" GridPane.columnIndex="2" />
-                              <SplitPane dividerPositions="0.49065420560747663" prefHeight="160.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                <items>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                       <children>
-                                          <VBox layoutX="1.0" prefHeight="200.0" prefWidth="100.0">
-                                             <children>
-                                                <Label text="login" />
-                                                <Label text="temporary password" wrapText="true" />
-                                                <Label text="access" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </AnchorPane>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                       <children>
-                                          <VBox layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0">
-                                             <children>
-                                                <TextField fx:id="loginTextField" />
-                                                <TextField fx:id="tempPassTextField" />
-                                                <TextField fx:id="accessTextField" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </AnchorPane>
-                                </items>
-                              </SplitPane>
-                              <SplitPane dividerPositions="0.5046728971962616" prefHeight="160.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                <items>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                       <children>
-                                          <Label layoutX="27.0" layoutY="31.0" text="login" />
-                                       </children>
-                                    </AnchorPane>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                       <children>
-                                          <TextField fx:id="loginToRemoveTextField" layoutX="-72.0" layoutY="32.0" />
-                                       </children>
-                                    </AnchorPane>
-                                </items>
-                              </SplitPane>
-                              <SplitPane dividerPositions="0.4719626168224299" prefHeight="160.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                <items>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                       <children>
-                                          <Label layoutX="22.0" layoutY="24.0" text="login" />
-                                       </children>
-                                    </AnchorPane>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                       <children>
-                                          <TextField fx:id="loginDisplayDataTextField" layoutX="-39.0" layoutY="23.0" />
-                                          <TextField fx:id="userIdTextField" layoutX="-53.0" layoutY="87.0" />
-                                          <TextField fx:id="accessTextFieldDisplayData" layoutX="-46.0" layoutY="54.0" />
-                                       </children>
-                                    </AnchorPane>
-                                </items>
-                              </SplitPane>
-                              <VBox GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                 <children>
-                                    <Label text="order's history" />
-                                    <ListView fx:id="ordersList" prefHeight="270.0" prefWidth="216.0" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </GridPane>
-                     </children></AnchorPane>
-               </content>
-            </Tab>
             <Tab fx:id="tickets" text="Tickets">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="423.0" prefWidth="748.0" />
@@ -462,6 +364,172 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
+            </Tab>
+            <Tab fx:id="adminPanel" text="Admin Panel">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="423.0" prefWidth="748.0">
+                     <children>
+                        <TabPane layoutX="2.0" layoutY="3.0" prefHeight="529.0" prefWidth="864.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="Add User">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="479.0" prefWidth="874.0">
+                                       <children>
+                                          <GridPane layoutX="3.0" layoutY="6.0" prefHeight="478.0" prefWidth="852.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="279.0" minWidth="10.0" prefWidth="117.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="590.0" minWidth="10.0" prefWidth="226.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="576.0" minWidth="10.0" prefWidth="508.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label text="Login">
+                                                   <GridPane.margin>
+                                                      <Insets left="20.0" />
+                                                   </GridPane.margin>
+                                                </Label>
+                                                <Label text="Password" GridPane.rowIndex="1">
+                                                   <GridPane.margin>
+                                                      <Insets left="20.0" />
+                                                   </GridPane.margin>
+                                                </Label>
+                                                <Label text="Access" GridPane.rowIndex="2">
+                                                   <GridPane.margin>
+                                                      <Insets left="20.0" />
+                                                   </GridPane.margin>
+                                                </Label>
+                                                <TextField fx:id="loginAddTextField" GridPane.columnIndex="1" />
+                                                <TextField fx:id="passwordTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <ComboBox fx:id="accessSelect" prefWidth="226.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Button fx:id="createNewUserButton" mnemonicParsing="false" onAction="#onButtonCreateNewUserButtonClicked" text="Create New User" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                   <GridPane.margin>
+                                                      <Insets left="50.0" />
+                                                   </GridPane.margin>
+                                                </Button>
+                                             </children>
+                                          </GridPane>
+                                       </children></AnchorPane>
+                              </content>
+                            </Tab>
+                              <Tab text="Remove User">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="479.0" prefWidth="874.0">
+                                       <children>
+                                          <GridPane layoutX="3.0" layoutY="6.0" prefHeight="478.0" prefWidth="852.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="279.0" minWidth="10.0" prefWidth="117.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="590.0" minWidth="10.0" prefWidth="226.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="576.0" minWidth="10.0" prefWidth="508.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Label text="Login">
+                                                   <GridPane.margin>
+                                                      <Insets left="20.0" />
+                                                   </GridPane.margin>
+                                                </Label>
+                                                <TextField fx:id="loginRemoveTextField" GridPane.columnIndex="1" />
+                                                <Button fx:id="removeUserButton" mnemonicParsing="false" onAction="#onButtonRemoveUserClicked" text="Remove User" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <GridPane.margin>
+                                                      <Insets left="50.0" />
+                                                   </GridPane.margin>
+                                                </Button>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Display User">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <SplitPane dividerPositions="0.5029239766081871" layoutX="2.0" layoutY="2.0" prefHeight="486.0" prefWidth="857.0">
+                                            <items>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <VBox layoutX="5.0" layoutY="6.0" prefHeight="479.0" prefWidth="419.0">
+                                                         <children>
+                                                            <Label text="Type login to be displayed:">
+                                                               <VBox.margin>
+                                                                  <Insets left="130.0" top="30.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <TextField fx:id="loginDisplayTextField">
+                                                               <VBox.margin>
+                                                                  <Insets left="20.0" right="20.0" top="20.0" />
+                                                               </VBox.margin>
+                                                            </TextField>
+                                                            <Label text="Access:">
+                                                               <VBox.margin>
+                                                                  <Insets left="170.0" top="20.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <TextField fx:id="accessDisplayTextField">
+                                                               <VBox.margin>
+                                                                  <Insets left="20.0" right="20.0" top="20.0" />
+                                                               </VBox.margin>
+                                                            </TextField>
+                                                            <Label text="User ID:">
+                                                               <VBox.margin>
+                                                                  <Insets left="170.0" top="20.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <TextField fx:id="userIdDisplayTextField">
+                                                               <VBox.margin>
+                                                                  <Insets left="20.0" right="20.0" top="20.0" />
+                                                               </VBox.margin>
+                                                            </TextField>
+                                                            <Button fx:id="displayUserDataButton" mnemonicParsing="false" onAction="#onButtonDisplayUsersDataClicked" text="Display User Data">
+                                                               <VBox.margin>
+                                                                  <Insets left="140.0" top="30.0" />
+                                                               </VBox.margin>
+                                                            </Button>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </AnchorPane>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                   <children>
+                                                      <VBox layoutX="3.0" prefHeight="486.0" prefWidth="415.0">
+                                                         <children>
+                                                            <Label text="User's orders history:">
+                                                               <VBox.margin>
+                                                                  <Insets left="120.0" top="35.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                            <ListView fx:id="ordersHistoryList" prefHeight="459.0" prefWidth="415.0">
+                                                               <VBox.margin>
+                                                                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                                               </VBox.margin>
+                                                            </ListView>
+                                                         </children>
+                                                      </VBox>
+                                                   </children></AnchorPane>
+                                            </items>
+                                          </SplitPane>
+                                       </children></AnchorPane>
+                                </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+               </content>
             </Tab>
         </tabs>
       </TabPane>

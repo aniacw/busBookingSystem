@@ -195,6 +195,21 @@ public class DataBaseManager {
         return new Data((statement.executeQuery(getData.toString())));
     }
 
+    public Data selectWhereColumnEqualsValueFromOtherColumn(String table, String column1, String searchInCol1,
+                                                            String column2) throws SQLException {
+        StringBuilder getValue = new StringBuilder();
+        getValue
+                .append("SELECT ")
+                .append(column2)
+                .append(" FROM ")
+                .append(table)
+                .append(" WHERE ")
+                .append(column1)
+                .append(" = ")
+                .append(objectToString(searchInCol1));
+        return new Data(statement.executeQuery(getValue.toString()));
+    }
+
     public Data getTable(String table) throws SQLException {
         StringBuilder getData = new StringBuilder();
         getData
