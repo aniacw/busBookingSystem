@@ -1,5 +1,6 @@
 package main.gui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -39,8 +40,6 @@ public class Controller {
             priceTextField,
             routeIdTextField,
             date,
-            dateTextField,
-            departureTimeTextField,
             destinationTextField,
             departureTextField,
             busNoTextField,
@@ -50,8 +49,7 @@ public class Controller {
             loginDisplayTextField,
             accessDisplayTextField,
             userIdDisplayTextField,
-            nameTextField,
-            loginTextField;
+            nameTextField;
 
     @FXML
     Button
@@ -107,6 +105,7 @@ public class Controller {
     @FXML
     DatePicker datePicker;
 
+    private Data departuresData;
 
     @FXML
     public void initialize() throws SQLException {
@@ -162,13 +161,14 @@ public class Controller {
         String departureSelected = departureList.getValue().toString();
         String destinationSelected = destinationList.getValue().toString();
         try {
-            Data result = Main.getInstance().getDeparturesManager().getDepartureTimesForRoute(
+            departuresData = Main.getInstance().getDeparturesManager().getDepartureTimesForRoute(
                     departureSelected, destinationSelected);
 
-            int dateColIdx = result.getColumnIndex("departure_date");
-            int timeColIdx = result.getColumnIndex("departure_time");
+            int dateColIdx = departuresData.getColumnIndex("departure_date");
+            int timeColIdx = departuresData.getColumnIndex("departure_time");
 
-            for (Data.Row row : result) {
+            preselectedBusesList.getItems().clear();
+            for (Data.Row row : departuresData) {
                 String rowString = row.get(dateColIdx).toString() + " " + row.get(timeColIdx).toString();
                 preselectedBusesList.getItems().add(rowString);
             }
@@ -180,9 +180,7 @@ public class Controller {
     public void onButtonResetClicked() {
         departureList.getSelectionModel().clearSelection();
         destinationList.getSelectionModel().clearSelection();
-        dateTextField.clear();
         preselectedBusesList.getItems().clear();
-        departureTimeTextField.clear();
     }
 
     public void onButtonAddBusClicked() {
@@ -234,7 +232,7 @@ public class Controller {
     }
 
     public void onButtonCreateNewUserButtonClicked() {
-        String login = loginTextField.getText();
+        String login = loginAddTextField.getText();
         String tempPassword = passwordTextField.getText();
 
         accessSelect.getItems().addAll("client", "admin");
@@ -290,57 +288,32 @@ public class Controller {
 
     public void onButtonBookBusClicked() {
         String name = nameTextField.getText();
-        String departureSelected = departureList.getValue().toString();
-        String destinationSelected = destinationList.getValue().toString();
-        String date = "";
-        String time = "";
-        String routeIdSelected = "";
-        String departureIdSelected = "";
-        String distanceSelected = "";
 
-        if (name == null)
+        if (name.isEmpty()) {
             AlertDialog.show("Please type your name", Alert.AlertType.ERROR);
-
-
+            return;
+        }
         try {
-            Data result = Main.getInstance().getDeparturesManager().getDepartureTimesForRoute(
-                    departureSelected, destinationSelected);
-
-            int dateColIdx = result.getColumnIndex("departure_date");
-            int timeColIdx = result.getColumnIndex("departure_time");
-
-            for (Data.Row row : result) {
-                date = row.get(dateColIdx).toString();
-                time = row.get(timeColIdx).toString();
+            if (departuresData == null) {
+                //... alert
+                return;
             }
+            int departudeIdColumn = departuresData.getColumnIndex("departure_id");
 
-            Data departuteIdResult = Main.getInstance().getDeparturesManager().getDeparturesIdOnDateTime(
-                    date, time);
+            int selectedDepartureIndex = preselectedBusesList.getSelectionModel().getSelectedIndex();
+            int departureId = departuresData.get(selectedDepartureIndex, departudeIdColumn);
 
-            for (Data.Row row : departuteIdResult)
-                departureIdSelected = row.toString();
+            double fare = Double.parseDouble(priceTextField.getText());
 
-            Data route = Main.getInstance().getRoutesManager().getRoute(departureSelected, destinationSelected);
-
-            for (Data.Row row : route)
-                routeIdSelected = row.toString();
-
-            Data distanceRsult = Main.getInstance().getRoutesManager().getDistance(departureSelected, destinationSelected);
-
-            for (Data.Row row : distanceRsult)
-                distanceSelected = row.toString();
-
-            FareCalculator.setOneKmCharge(0.80);
-            double fare = FareCalculator.calculateFare(FareCalculator.getOneKmCharge(), 100);
-
-            Main.getInstance().getBookingsManager().addOrder(name, routeIdSelected, departureIdSelected, fare,
-                    Main.getInstance().getLoginManager().getLoggedUser().toString());
+            Main.getInstance().getBookingsManager().addOrder(name, departureId, fare,
+                    Main.getInstance().getLoginManager().getLoggedUser().getId());
 
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     public void onButtonChangePasswordClicked() {
         String currentPass = "";
@@ -362,4 +335,12 @@ public class Controller {
 
     }
 
+    public void onPreselectedBusesListSelected(ActionEvent actionEvent) {
+        preselectedBusesList.getSelectionModel();
+        int selectedDepartureIndex = preselectedBusesList.getSelectionModel().getSelectedIndex();
+        int distanceColumn = departuresData.getColumnIndex("distance");
+        int distance = departuresData.get(selectedDepartureIndex, distanceColumn);
+        priceTextField.setText(Double.toString(distance*0.9));
+
+    }
 }

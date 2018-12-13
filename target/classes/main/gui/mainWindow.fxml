@@ -10,6 +10,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -185,16 +186,15 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="423.0" prefWidth="748.0">
                      <children>
-                        <GridPane layoutY="-15.0" prefHeight="553.0" prefWidth="864.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+                        <GridPane layoutY="-15.0" prefHeight="513.0" prefWidth="864.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints maxHeight="408.0" minHeight="10.0" prefHeight="178.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="266.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="500.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="500.0" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="500.0" minHeight="0.0" prefHeight="209.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="408.0" minHeight="10.0" prefHeight="133.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="266.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="500.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="500.0" minHeight="0.0" prefHeight="305.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
                               <GridPane prefHeight="413.0" prefWidth="739.0" scaleShape="false">
@@ -205,8 +205,8 @@
                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="305.0" minWidth="10.0" prefWidth="258.0" />
                                 </columnConstraints>
                                 <rowConstraints>
-                                  <RowConstraints fillHeight="false" maxHeight="133.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="263.0" minHeight="10.0" prefHeight="102.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
+                                  <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
                                     <Label text="Departure">
@@ -218,64 +218,28 @@
                                        <GridPane.margin>
                                           <Insets left="30.0" />
                                        </GridPane.margin></Label>
-                                    <ComboBox fx:id="destinationList" prefHeight="25.0" prefWidth="224.0" GridPane.columnIndex="3" />
-                                    <Label text="Date" GridPane.rowIndex="1">
-                                       <padding>
-                                          <Insets left="10.0" />
-                                       </padding>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                    <Button fx:id="getBusDetailsButton" mnemonicParsing="false" onAction="#onGetBusDetailsButtonClicked" prefHeight="47.0" prefWidth="120.0" text="Get Bus Details" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <GridPane.margin>
-                                          <Insets bottom="10.0" />
-                                       </GridPane.margin></Label>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                       <children>
-                                          <Button fx:id="getBusDetailsButton" mnemonicParsing="false" onAction="#onGetBusDetailsButtonClicked" text="Get Bus Details">
-                                             <VBox.margin>
-                                                <Insets left="20.0" top="22.0" />
-                                             </VBox.margin></Button>
-                                       </children>
+                                          <Insets left="50.0" />
+                                       </GridPane.margin></Button>
+                                    <Button fx:id="resetButton" mnemonicParsing="false" onAction="#onButtonResetClicked" prefHeight="42.0" prefWidth="96.0" text="Reset" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                        <GridPane.margin>
-                                          <Insets />
-                                       </GridPane.margin>
-                                       <padding>
-                                          <Insets top="14.0" />
-                                       </padding>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                       <children>
-                                          <VBox prefHeight="200.0" prefWidth="100.0">
-                                             <children>
-                                                <TextField fx:id="dateTextField" prefHeight="31.0" prefWidth="224.0">
-                                                   <VBox.margin>
-                                                      <Insets top="35.0" />
-                                                   </VBox.margin></TextField>
-                                                <Label text="Date format: YYYY-MM-DD ">
-                                                   <VBox.margin>
-                                                      <Insets left="40.0" />
-                                                   </VBox.margin></Label>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                       <children>
-                                          <Button fx:id="resetButton" mnemonicParsing="false" onAction="#onButtonResetClicked" prefWidth="96.0" text="Reset">
-                                             <VBox.margin>
-                                                <Insets left="30.0" top="35.0" />
-                                             </VBox.margin>
-                                          </Button>
-                                       </children></VBox>
+                                          <Insets left="30.0" />
+                                       </GridPane.margin></Button>
+                                    <ComboBox fx:id="destinationList" prefHeight="31.0" prefWidth="236.0" GridPane.columnIndex="3" />
                                  </children>
                                  <padding>
                                     <Insets left="20.0" />
                                  </padding>
                               </GridPane>
-                              <GridPane GridPane.rowIndex="4">
+                              <GridPane maxHeight="200.0" prefHeight="200.0" prefWidth="862.0" GridPane.rowIndex="3">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="426.0" minWidth="10.0" prefWidth="118.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="746.0" minWidth="10.0" prefWidth="746.0" />
                                 </columnConstraints>
                                 <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="250.0" minHeight="10.0" prefHeight="250.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
                                     <GridPane GridPane.columnIndex="1">
@@ -296,19 +260,145 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
+                                       <children>
+                                          <ToggleButton fx:id="seat1A" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" style="-fx-background-color: B3CEE9;" text="1A">
+                                             <GridPane.margin>
+                                                <Insets left="10.0" />
+                                             </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat2A" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="2A" GridPane.columnIndex="1">
+                                              <GridPane.margin>
+                                           <Insets left="10.0" />
+                                       </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat3A" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="3A" GridPane.columnIndex="2">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat4A" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="4A" GridPane.columnIndex="3">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat5A" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="5A" GridPane.columnIndex="4">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat6A" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="6A" GridPane.columnIndex="5">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat7A" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="7A" GridPane.columnIndex="6">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat8A" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="8A" GridPane.columnIndex="7">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat9A" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="9A" GridPane.columnIndex="8">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat10A" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="10A" GridPane.columnIndex="9">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat1B" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="1B" GridPane.rowIndex="1">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat2B" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="2B" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat3B" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="3B" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat4B" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="4B" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat5B" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="5B" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat6B" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="6B" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat7B" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="7B" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat8B" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="8B" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat9B" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="9B" GridPane.columnIndex="8" GridPane.rowIndex="1">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat10B" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="10B" GridPane.columnIndex="9" GridPane.rowIndex="1">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat1C" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="1C" GridPane.rowIndex="2">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat2C" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="2C" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat3C" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="3C" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat4C" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="4C" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat5C" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="5C" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat6C" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="6C" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat7C" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="7C" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat8C" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="8C" GridPane.columnIndex="7" GridPane.rowIndex="2">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat9C" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="9C" GridPane.columnIndex="8" GridPane.rowIndex="2">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                          <ToggleButton fx:id="seat10C" mnemonicParsing="false" prefHeight="54.0" prefWidth="54.0" text="10C" GridPane.columnIndex="9" GridPane.rowIndex="2">
+                                              <GridPane.margin>
+                                                  <Insets left="10.0" />
+                                              </GridPane.margin></ToggleButton>
+                                       </children>
                                     </GridPane>
+                                    <Label text="Select seat(s):">
+                                       <GridPane.margin>
+                                          <Insets left="20.0" />
+                                       </GridPane.margin>
+                                    </Label>
                                  </children>
                               </GridPane>
-                              <GridPane GridPane.rowIndex="3">
+                              <GridPane GridPane.rowIndex="2">
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="378.0" minWidth="10.0" prefWidth="378.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="245.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="378.0" minWidth="10.0" prefWidth="165.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="458.0" minWidth="10.0" prefWidth="458.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="196.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" prefWidth="14.0" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
                                     <Button fx:id="bookBusButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onButtonBookBusClicked" prefHeight="52.0" prefWidth="201.0" text="Book Bus" textFill="#0abc4b" GridPane.columnIndex="2">
@@ -320,12 +410,13 @@
                                        </font></Button>
                                     <Label text="Name on the ticket">
                                        <GridPane.margin>
-                                          <Insets left="120.0" />
+                                          <Insets left="20.0" />
                                        </GridPane.margin></Label>
-                                    <TextField fx:id="nameTextField" GridPane.rowIndex="1">
+                                    <TextField fx:id="nameTextField" GridPane.columnIndex="1">
                                        <GridPane.margin>
-                                          <Insets left="30.0" />
-                                       </GridPane.margin></TextField>
+                                          <Insets left="20.0" right="20.0" />
+                                       </GridPane.margin>
+                                    </TextField>
                                  </children>
                               </GridPane>
                               <HBox GridPane.rowIndex="1">
@@ -334,18 +425,18 @@
                                        <HBox.margin>
                                           <Insets left="30.0" top="7.0" />
                                        </HBox.margin></Label>
-                                    <ComboBox fx:id="preselectedBusesList" prefHeight="31.0" prefWidth="202.0">
+                                    <ComboBox fx:id="preselectedBusesList" onAction="#onPreselectedBusesListSelected" prefHeight="31.0" prefWidth="222.0">
                                        <HBox.margin>
-                                          <Insets left="20.0" />
+                                          <Insets left="20.0" top="5.0" />
                                        </HBox.margin></ComboBox>
                                     <Label text="Price">
                                        <HBox.margin>
                                           <Insets left="60.0" top="7.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField fx:id="priceTextField" prefHeight="31.0" prefWidth="84.0">
+                                    <TextField fx:id="priceTextField" prefHeight="31.0" prefWidth="76.0">
                                        <HBox.margin>
-                                          <Insets left="20.0" />
+                                          <Insets left="20.0" top="5.0" />
                                        </HBox.margin>
                                     </TextField>
                                  </children>
@@ -355,14 +446,86 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="tickets" text="Tickets">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="423.0" prefWidth="748.0" />
-               </content>
-            </Tab>
             <Tab text="User Panel">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.37543859649122807" layoutX="4.0" layoutY="3.0" prefHeight="527.0" prefWidth="857.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <VBox layoutX="1.0" layoutY="1.0" prefHeight="525.0" prefWidth="314.0">
+                                       <children>
+                                          <Label text="Change my password:">
+                                             <VBox.margin>
+                                                <Insets left="70.0" top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label text="Type current password:">
+                                             <VBox.margin>
+                                                <Insets left="70.0" top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="currentPasswordUserTextField">
+                                             <VBox.margin>
+                                                <Insets left="20.0" right="20.0" top="20.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <Label text="New password:">
+                                             <VBox.margin>
+                                                <Insets left="90.0" top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="newPasswordUserTextField">
+                                             <VBox.margin>
+                                                <Insets left="20.0" right="20.0" top="20.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <Label text="Confirm new password:">
+                                             <VBox.margin>
+                                                <Insets left="70.0" top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="confirmPasswordUserTextField">
+                                             <VBox.margin>
+                                                <Insets left="20.0" right="20.0" top="20.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <Button fx:id="changePasswordButton" mnemonicParsing="false" text="Change password">
+                                             <VBox.margin>
+                                                <Insets left="70.0" top="30.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <VBox layoutX="2.0" layoutY="4.0" prefHeight="520.0" prefWidth="527.0">
+                                       <children>
+                                          <Button fx:id="myOrdersButton" mnemonicParsing="false" text="My Orders">
+                                             <VBox.margin>
+                                                <Insets left="180.0" top="20.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                          <ListView prefHeight="465.0" prefWidth="527.0">
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                             </VBox.margin>
+                                          </ListView>
+                                          <Button mnemonicParsing="false" text="Print my ticket">
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" left="170.0" />
+                                             </VBox.margin>
+                                          </Button>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab fx:id="adminPanel" text="Admin Panel">

@@ -119,21 +119,23 @@ public class LoginManager {
             Pair<String, String> resultData = result.get();
             loggedUser = null;
             return verifyCredentials(resultData.getKey(), resultData.getValue());
+
            // currentTime = new SimpleDateFormat();
         } else
             return true;
     }
 
-    public void addToLoginHistory(String logged){
+    public void addToLoginHistory(){
+        Timestamp ts =new Timestamp(System.currentTimeMillis());
         if (loggedUser != null){
             StringBuilder rowToInsert = new StringBuilder();
             rowToInsert
                     .append(loggedUser.getLogin())
-                    .append(", ");
-                    //.append(timestamp);
+                    .append(", ")
+                    .append(ts);
             try {
-                Main.getInstance().getDataBaseManager().insertValuesIntoExistingTable(
-                        "login_history", rowToInsert.toString());
+                Main.getInstance().getDataBaseManager().insertObjectsIntoTable(
+                        "login_history", null, loggedUser.getId(), ts);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -149,7 +151,8 @@ public class LoginManager {
             String dbPassword = data.getFromTopRow(3);
             dbAccess = data.getFromTopRow(4);
             if (dbPassword.equals(password)) {
-                loggedUser = new User(userName, password, dbAccess);
+                int userId = data.getFromTopRow(1);
+                loggedUser = new User(userId, userName, password, dbAccess);
                 return true;
             } else
                 return false;

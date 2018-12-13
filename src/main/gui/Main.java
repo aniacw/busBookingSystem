@@ -73,6 +73,7 @@ public class Main extends Application {
             loginSuccess = loginManager.loginDialog();
         } while (!loginSuccess);
 
+        loginManager.addToLoginHistory();
         if (loginManager.isLoggedIn()) {
             Pane root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
             primaryStage.setTitle("Book a Dream Bus!");

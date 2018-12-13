@@ -10,13 +10,13 @@ public class BookingsManager {
         this.manager = manager;
     }
 
-    public void addOrder(String name, int routeId, int departureId, double price, String login) throws SQLException {
-        manager.insertObjectsIntoTable("bookings", name, routeId, departureId, price, login);
-    }
+//    public void addOrder(String name, int routeId, int departureId, double price, String login) throws SQLException {
+//        manager.insertObjectsIntoTable("bookings", name, routeId, departureId, price, login);
+//    }
 
-    public void addOrder(String name, String routeIdSelected, String departureIdSelected, double fare,
-                         String login) throws SQLException {
-        manager.insertObjectsIntoTable("bookings", name, routeIdSelected, departureIdSelected, fare, login);
+    public void addOrder(String name, int departureIdSelected, double fare,
+                         int userId) throws SQLException {
+        manager.insertObjectsIntoTable("bookings", null, name, departureIdSelected, fare, userId);
     }
 
 

@@ -15,14 +15,12 @@ public class DeparturesManager {
 
     public Data getDeparturesIdOnDateTime(String date, String time) throws SQLException {
         return manager.selectWhereColumnEquals2("departures", "departure_date", date,
-                "departure_id", time, "departure_time");
+                "departure_time", time, "departure_id");
     }
 
     public Data getDepartureTimesForRoute(String departure, String destination) throws SQLException {
-        return manager.selectWhereColumnEqualsJoinTables("routes",
-                "departure", "destination", "route_id", "departures",
-                departure, destination);
+        return manager.selectWhereColumnEqualsJoinTables("routes", "departure",
+                "destination", "route_id", "departures", departure, destination);
     }
-
 
 }

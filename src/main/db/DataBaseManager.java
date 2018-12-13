@@ -175,9 +175,8 @@ public class DataBaseManager {
 
     }
 
-    public Data selectWhereColumnEquals2(String table, String column1, String selectedValue1,
-                                         String selectedColumn, String selectedValue2,
-                                         String column2) throws SQLException {
+    public Data selectWhereColumnEquals2(String table, String column1, String selectedValue1, String column2,
+                                         String selectedValue2, String selectedColumn) throws SQLException {
         StringBuilder getData = new StringBuilder();
         getData
                 .append("SELECT ")
@@ -223,7 +222,7 @@ public class DataBaseManager {
     }
 
     private static String objectToString(Object o) {
-        if (o instanceof String || o instanceof Date)
+        if (o instanceof String || o instanceof java.util.Date)
             return '\'' + o.toString() + '\'';
         else
             return o.toString();
