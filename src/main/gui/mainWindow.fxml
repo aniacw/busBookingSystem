@@ -33,158 +33,6 @@
    <children>
       <TabPane fx:id="mainTabPanel" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
         <tabs>
-          <Tab fx:id="busManagement" text="to delete">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <GridPane layoutX="6.0" layoutY="-1.0" prefHeight="517.0" prefWidth="858.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="294.0" minHeight="10.0" prefHeight="294.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="380.0" minHeight="10.0" prefHeight="185.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <GridPane>
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="424.0" minWidth="10.0" prefWidth="113.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="424.0" minWidth="10.0" prefWidth="242.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="515.0" minWidth="10.0" prefWidth="515.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="73.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="99.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="2">
-                                       <children>
-                                          <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="124.0" text="Add Bus" />
-                                          <Button fx:id="removeBusButton" mnemonicParsing="false" onAction="#onButtonRemoveBusClicked" prefHeight="40.0" prefWidth="124.0" text="Remove Bus" />
-                                       </children>
-                                       <padding>
-                                          <Insets left="10.0" top="15.0" />
-                                       </padding>
-                                    </HBox>
-                                    <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                       <children>
-                                          <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="124.0" text="Fetch Data" />
-                                          <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="124.0" text="Update Data" />
-                                       </children>
-                                       <padding>
-                                          <Insets left="10.0" top="15.0" />
-                                       </padding>
-                                    </HBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
-                                       <children>
-                                          <Label fx:id="departureIdLabel" text="Departure ID">
-                                             <VBox.margin>
-                                                <Insets top="20.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <Label fx:id="routeIdLabel" prefHeight="21.0" prefWidth="77.0" text="Route ID">
-                                             <VBox.margin>
-                                                <Insets top="10.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                       </children>
-                                    </VBox>
-                                    <VBox GridPane.columnIndex="1">
-                                       <children>
-                                          <TextField fx:id="departureId" prefHeight="25.0" prefWidth="233.0">
-                                             <VBox.margin>
-                                                <Insets top="15.0" />
-                                             </VBox.margin>
-                                          </TextField>
-                                          <TextField fx:id="routeIdTextField" prefHeight="25.0" prefWidth="199.0">
-                                             <VBox.margin>
-                                                <Insets top="5.0" />
-                                             </VBox.margin>
-                                          </TextField>
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
-                                       <children>
-                                          <Label text="Date">
-                                             <VBox.margin>
-                                                <Insets top="10.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                       </children>
-                                    </VBox>
-                                    <GridPane prefHeight="52.0" prefWidth="241.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="113.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="176.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                          <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                       <children>
-                                          <TextField fx:id="date" prefHeight="31.0" prefWidth="220.0">
-                                             <GridPane.margin>
-                                                <Insets top="5.0" />
-                                             </GridPane.margin></TextField>
-                                          <DatePicker fx:id="datePicker" editable="false" GridPane.columnIndex="1">
-                                             <GridPane.margin>
-                                                <Insets top="5.0" />
-                                             </GridPane.margin></DatePicker>
-                                       </children>
-                                    </GridPane>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
-                                       <children>
-                                          <Label text="Departure">
-                                             <VBox.margin>
-                                                <Insets top="10.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <Label text="Destination">
-                                             <VBox.margin>
-                                                <Insets top="15.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <Label text="Bus no">
-                                             <VBox.margin>
-                                                <Insets top="15.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <children>
-                                          <TextField>
-                                             <padding>
-                                                <Insets top="10.0" />
-                                             </padding>
-                                             <VBox.margin>
-                                                <Insets top="5.0" />
-                                             </VBox.margin>
-                                          </TextField>
-                                          <TextField>
-                                             <padding>
-                                                <Insets top="10.0" />
-                                             </padding>
-                                             <VBox.margin>
-                                                <Insets top="5.0" />
-                                             </VBox.margin>
-                                          </TextField>
-                                          <TextField>
-                                             <VBox.margin>
-                                                <Insets top="5.0" />
-                                             </VBox.margin>
-                                          </TextField>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </GridPane>
-                              <Label fx:id="statusBar" prefHeight="21.0" prefWidth="858.0" GridPane.rowIndex="2" />
-                           </children>
-                        </GridPane>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
           <Tab fx:id="reservation" text="Reservation">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="423.0" prefWidth="748.0">
@@ -936,11 +784,110 @@
                                           </AnchorPane>
                                     </content>
                                   </Tab>
-                                  <Tab text="Departures">
-                                    <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="446.0" prefWidth="845.0" />
-                                    </content>
-                                  </Tab>
+                                    <Tab text="Departures">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="270.0" prefWidth="548.0">
+                                             <children>
+                                                <SplitPane dividerPositions="0.5062111801242236" layoutX="8.0" layoutY="6.0" prefHeight="484.0" prefWidth="849.0">
+                                                   <items>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                         <children>
+                                                            <VBox layoutX="5.0" layoutY="4.0" prefHeight="455.0" prefWidth="416.0">
+                                                               <children>
+                                                                  <Label text="Add New Departure" textFill="#050d82">
+                                                                     <VBox.margin>
+                                                                        <Insets left="140.0" top="30.0" />
+                                                                     </VBox.margin>
+                                                                     <font>
+                                                                        <Font name="Marlett" size="18.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <Label text="Route ID" textFill="#050d82">
+                                                                     <VBox.margin>
+                                                                        <Insets left="170.0" top="20.0" />
+                                                                     </VBox.margin>
+                                                                     <font>
+                                                                        <Font name="Marlett" size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <ComboBox fx:id="routeIdComboBox" prefWidth="150.0" promptText="select...">
+                                                                     <VBox.margin>
+                                                                        <Insets left="120.0" top="20.0" />
+                                                                     </VBox.margin></ComboBox>
+                                                                  <Label text="Date" textFill="#050d82">
+                                                                     <VBox.margin>
+                                                                        <Insets left="165.0" top="20.0" />
+                                                                     </VBox.margin>
+                                                                     <font>
+                                                                        <Font name="Mangal" size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <DatePicker fx:id="datePicker">
+                                                                     <VBox.margin>
+                                                                        <Insets left="80.0" top="20.0" />
+                                                                     </VBox.margin></DatePicker>
+                                                                  <Label text="Time" textFill="#050d82">
+                                                                     <VBox.margin>
+                                                                        <Insets left="180.0" top="20.0" />
+                                                                     </VBox.margin>
+                                                                     <font>
+                                                                        <Font name="Marlett" size="15.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <TextField fx:id="timeTextField" promptText="hh:mm:ss">
+                                                                     <VBox.margin>
+                                                                        <Insets left="150.0" right="150.0" top="20.0" />
+                                                                     </VBox.margin>
+                                                                  </TextField>
+                                                                  <Button fx:id="addDepartureButton" mnemonicParsing="false" text="Add">
+                                                                     <VBox.margin>
+                                                                        <Insets left="185.0" top="30.0" />
+                                                                     </VBox.margin>
+                                                                  </Button>
+                                                               </children>
+                                                               <effect>
+                                                                  <InnerShadow color="#010446" />
+                                                               </effect>
+                                                            </VBox>
+                                                            <Label layoutX="1.0" layoutY="446.0" prefHeight="33.0" prefWidth="849.0" textFill="#035b13" />
+                                                            <Label layoutX="5.0" layoutY="458.0" prefHeight="21.0" prefWidth="838.0" text="Label" textFill="#035b13" />
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                         <children>
+                                                            <VBox layoutX="1.0" layoutY="4.0" prefHeight="457.0" prefWidth="409.0">
+                                                               <children>
+                                                                  <Label text="Delete Departure" textFill="#050d82">
+                                                                     <VBox.margin>
+                                                                        <Insets left="140.0" top="30.0" />
+                                                                     </VBox.margin>
+                                                                     <font>
+                                                                        <Font name="Marlett" size="18.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <ListView prefHeight="200.0" prefWidth="200.0">
+                                                                     <VBox.margin>
+                                                                        <Insets left="20.0" right="20.0" top="20.0" />
+                                                                     </VBox.margin>
+                                                                  </ListView>
+                                                                  <Button mnemonicParsing="false" text="Delete">
+                                                                     <VBox.margin>
+                                                                        <Insets left="170.0" top="30.0" />
+                                                                     </VBox.margin>
+                                                                  </Button>
+                                                               </children>
+                                                               <effect>
+                                                                  <InnerShadow color="#010446" />
+                                                               </effect>
+                                                            </VBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </items>
+                                                </SplitPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </Tab>
                                 </tabs>
                               </TabPane>
                               <Label fx:id="statusBarBusManagement" />

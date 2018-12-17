@@ -45,5 +45,8 @@ public class RoutesManager {
                 "distance", selectedDestination, "destination");
     }
 
+    public Data getRouteId() throws SQLException {
+        return manager.getColumnFromTable("route_id", "routes");
+    }
 
 }

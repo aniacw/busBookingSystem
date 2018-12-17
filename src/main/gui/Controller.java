@@ -6,12 +6,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.StringConverter;
+import javafx.util.converter.DateTimeStringConverter;
 import main.FareCalculator;
 import main.db.Data;
 import main.db.DataProcessor;
 
 import java.lang.management.ManagementFactory;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -28,6 +31,7 @@ public class Controller {
             departureList,
             destinationList,
             accessSelect,
+            routeIdComboBox,
             preselectedBusesList;
 
     @FXML
@@ -38,10 +42,8 @@ public class Controller {
             currentPasswordUserTextField,
             newPasswordUserTextField,
             confirmPasswordUserTextField,
-            departureId,
+            timeTextField,
             priceTextField,
-            routeIdTextField,
-            date,
             destinationTextField,
             departureTextField,
             busNoTextField,
@@ -56,12 +58,12 @@ public class Controller {
     @FXML
     Button
             addBusButton,
-            removeBusButton,
             bookBusButton,
             removeUserButton,
             displayUserDataButton,
             myOrdersButton,
             changePasswordButton,
+            addDepartureButton,
             createNewUserButton;
 
     @FXML
@@ -113,7 +115,6 @@ public class Controller {
 
     private Data departuresData;
     private Data routeToRemove;
-    private int routeIdToRemove;
     private ToggleGroup seats;
 
     @FXML
@@ -160,6 +161,19 @@ public class Controller {
             String rowString = row.get(1).toString() + " " + row.get(2).toString() + " " + row.get(3).toString() + " " +
                     row.get(4).toString() + " " + row.get(5).toString();
             routesListManagement.getItems().add(rowString);
+        }
+
+        Data data1 = Main.getInstance().getRoutesManager().getRouteId();
+        for(Data.Row row : data1) {
+            int routeId = Integer.parseInt(row.get(1).toString());
+            routeIdComboBox.getItems().add(routeId);
+        }
+
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        try {
+            timeTextField.setTextFormatter(new TextFormatter<>(new DateTimeStringConverter(format), format.parse("00:00:00")));
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 
@@ -380,12 +394,6 @@ public class Controller {
         priceTextField.setText(Double.toString(distance * 0.9));
     }
 
-    //nie dziala
-    public void onRoutesListManagementSelected(ActionEvent actionEvent) {
-        routesListManagement.getSelectionModel();
-        // int index = routesListManagement.getSelectionModel().getSelectedIndex();
-        routeIdToRemove = routeToRemove.getColumnIndex("route_id");
-    }
 
     //nie dziala
     public void onSeatSelected(ActionEvent actionEvent) {
