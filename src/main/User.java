@@ -2,12 +2,10 @@ package main;
 
 public class User {
 
-
     private int id;
     private String login;
     private String password;
     private String access;
-
 
     public User(int id, String login, String password, String access) {
         this.id=id;

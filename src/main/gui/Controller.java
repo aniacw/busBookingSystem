@@ -1,5 +1,6 @@
 package main.gui;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -9,6 +10,7 @@ import main.FareCalculator;
 import main.db.Data;
 import main.db.DataProcessor;
 
+import java.lang.management.ManagementFactory;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -53,14 +55,13 @@ public class Controller {
 
     @FXML
     Button
-            getBusDetailsButton,
-            resetButton,
             addBusButton,
             removeBusButton,
             bookBusButton,
             removeUserButton,
             displayUserDataButton,
             myOrdersButton,
+            changePasswordButton,
             createNewUserButton;
 
     @FXML
@@ -97,30 +98,33 @@ public class Controller {
             seat10C;
 
     @FXML
-    ListView<Object> ordersHistoryList;
+    ListView<Object>
+            ordersHistoryList,
+            routesListManagement;
 
     @FXML
-    Label statusBar;
+    Label
+            statusBarAdminMenu,
+            statusBarBusManagement,
+            statusBarReservation;
 
     @FXML
     DatePicker datePicker;
 
     private Data departuresData;
+    private Data routeToRemove;
+    private int routeIdToRemove;
+    private ToggleGroup seats;
 
     @FXML
     public void initialize() throws SQLException {
 
         accessTabs();
+
         Data data = Main.getInstance().getDataBaseManager().getColumnFromTable("departure", "routes");
         for (Data.Row row : data) {
             String rowString = row.get(1).toString();
             departureList.getItems().add(rowString);
-        }
-
-        Data data1 = Main.getInstance().getDataBaseManager().getColumnFromTable("destination", "routes");
-        for (Data.Row row : data1) {
-            String rowString = row.get(1).toString();
-            destinationList.getItems().add(rowString);
         }
 
         datePicker.setConverter(new StringConverter<LocalDate>() {
@@ -148,8 +152,33 @@ public class Controller {
                     return null;
                 }
             }
+
         });
 
+        routeToRemove = Main.getInstance().getDataBaseManager().getTable("routes");
+        for (Data.Row row : routeToRemove) {
+            String rowString = row.get(1).toString() + " " + row.get(2).toString() + " " + row.get(3).toString() + " " +
+                    row.get(4).toString() + " " + row.get(5).toString();
+            routesListManagement.getItems().add(rowString);
+        }
+    }
+
+    //dziala
+    public void onDeparturesSelected() {
+        destinationList.getItems().clear();
+
+        try {
+            Data data = Main.getInstance().getDataBaseManager().selectWhereColumnEqualsValueFromOtherColumn("routes",
+                    "departure", departureList.getValue().toString(), "destination");
+
+            for (Data.Row row : data) {
+                String rowString = row.get(1).toString();
+                destinationList.getItems().add(rowString);
+            }
+        } catch (SQLException e) {
+            statusBarReservation.setText("Ooops, something went wrong:(");
+            e.printStackTrace();
+        }
     }
 
     public void accessTabs() {
@@ -157,7 +186,8 @@ public class Controller {
             mainTabPanel.getTabs().removeAll(busManagement, adminPanel);
     }
 
-    public void onGetBusDetailsButtonClicked() {
+    //dziala
+    public void onDestinationSelected() {
         String departureSelected = departureList.getValue().toString();
         String destinationSelected = destinationList.getValue().toString();
         try {
@@ -173,14 +203,9 @@ public class Controller {
                 preselectedBusesList.getItems().add(rowString);
             }
         } catch (SQLException e) {
-            statusBar.setText(e.getMessage());
+            statusBarReservation.setText("Ooops, something went wrong:(");
+            e.printStackTrace();
         }
-    }
-
-    public void onButtonResetClicked() {
-        departureList.getSelectionModel().clearSelection();
-        destinationList.getSelectionModel().clearSelection();
-        preselectedBusesList.getItems().clear();
     }
 
     public void onButtonAddBusClicked() {
@@ -191,44 +216,54 @@ public class Controller {
 
         try {
             Main.getInstance().getRoutesManager().addNewRoute(newDeparture, newDestination, newBusNo);
-
-            AlertDialog.show("New route created!");
-
+            statusBarBusManagement.setText("New route created!");
         } catch (SQLException e) {
+            statusBarBusManagement.setText("Ooops, something went wrong:(");
             e.printStackTrace();
         }
     }
 
+    //nie dziala
     public void onButtonRemoveBusClicked() {
 
-        String departure = departureTextField.getText().trim();
-        String destination = destinationTextField.getText().trim();
-        String routeId = routeIdTextField.getText().trim();
+        ObservableList<Object> selectedRoute = routesListManagement.getSelectionModel().getSelectedItems();
+        int id = (int) selectedRoute.get(0);
 
-        if (!departure.isEmpty() && !destination.isEmpty()) {
-            try {
-                AlertDialog.show("Are you sure?", Alert.AlertType.CONFIRMATION);
-                if (Main.getInstance().getRoutesManager().removeRoute(departure, destination)) {
-                    statusBar.setText("Route removed successfully");
-                } else {
-                    statusBar.setText("Route with given parameters does not exist");
-                }
-                //AlertDialog.show("Bus deleted!");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } else if (!routeId.isEmpty()) {
-            try {
-                AlertDialog.show("Are you sure?", Alert.AlertType.CONFIRMATION);
-                if (Main.getInstance().getRoutesManager().removeRouteById(routeId)) {
-                    statusBar.setText("Route removed successfully");
-                } else {
-                    statusBar.setText("Route with given parameters does not exist");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        try {
+            Main.getInstance().getRoutesManager().removeRouteById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+
+//        String departure = departureTextField.getText().trim();
+//        String destination = destinationTextField.getText().trim();
+//        String routeId = routeIdTextField.getText().trim();
+
+//        if (!departure.isEmpty() && !destination.isEmpty()) {
+//            try {
+//                AlertDialog.show("Are you sure?", Alert.AlertType.CONFIRMATION);
+//                if (Main.getInstance().getRoutesManager().removeRoute(departure, destination)) {
+//                    statusBar.setText("Route removed successfully");
+//                } else {
+//                    statusBar.setText("Route with given parameters does not exist");
+//                }
+//                //AlertDialog.show("Bus deleted!");
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        } else if (!routeId.isEmpty()) {
+//            try {
+//                AlertDialog.show("Are you sure?", Alert.AlertType.CONFIRMATION);
+//                if (Main.getInstance().getRoutesManager().removeRouteById(routeId)) {
+//                    statusBar.setText("Route removed successfully");
+//                } else {
+//                    statusBar.setText("Route with given parameters does not exist");
+//                }
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+
     }
 
     public void onButtonCreateNewUserButtonClicked() {
@@ -241,10 +276,10 @@ public class Controller {
         if (Main.getInstance().getLoginManager().getLoggedUser().getAccess().equals("admin")) {
             try {
                 Main.getInstance().getUsersManager().addNewUser(login, tempPassword, access);
-                statusBar.setText("User added");
+                statusBarAdminMenu.setText("User added");
             } catch (SQLException e) {
                 AlertDialog.show(e.getMessage());
-                statusBar.setText(e.getMessage());
+                statusBarAdminMenu.setText(e.getMessage());
             }
         }
     }
@@ -254,9 +289,9 @@ public class Controller {
         if (Main.getInstance().getLoginManager().getLoggedUser().getAccess().equals("admin")) {
             try {
                 Main.getInstance().getUsersManager().removeUser(login);
-                statusBar.setText("User deleted");
+                statusBarAdminMenu.setText("User deleted");
             } catch (SQLException e) {
-                statusBar.setText(e.getMessage());
+                statusBarAdminMenu.setText(e.getMessage());
             }
         }
     }
@@ -295,7 +330,7 @@ public class Controller {
         }
         try {
             if (departuresData == null) {
-                //... alert
+                AlertDialog.show("No data selected!", Alert.AlertType.ERROR);
                 return;
             }
             int departudeIdColumn = departuresData.getColumnIndex("departure_id");
@@ -308,31 +343,33 @@ public class Controller {
             Main.getInstance().getBookingsManager().addOrder(name, departureId, fare,
                     Main.getInstance().getLoginManager().getLoggedUser().getId());
 
+            statusBarReservation.setText("Reservation successfully completed!");
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    //dziala
+    public void onButtonChangePasswordClicked() throws SQLException {
 
-    public void onButtonChangePasswordClicked() {
-        String currentPass = "";
-
-        try {
-            currentPass = Main.getInstance().getUsersManager().getPassword(Main.getInstance().getLoginManager().getLoggedUser().toString()).toString();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String currenltyLoggedIn = Main.getInstance().getLoginManager().getLoggedUser().getLogin();
+        Data currentPassData = Main.getInstance().getUsersManager().getPassword(currenltyLoggedIn);
+        String currentPass = currentPassData.get(1, 1).toString();
 
         if (currentPass.equals(currentPasswordUserTextField.getText())) {
             if (newPasswordUserTextField.getText().equals(confirmPasswordUserTextField.getText())) {
-            } else {
+                try {
+                    Main.getInstance().getUsersManager().changePassword(currenltyLoggedIn, newPasswordUserTextField.getText());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            } else
                 AlertDialog.show("Passwords are not the same!", Alert.AlertType.WARNING);
-            }
 
-        }
-
-
+        } else
+            AlertDialog.show("Incorrect password", Alert.AlertType.ERROR);
     }
 
     public void onPreselectedBusesListSelected(ActionEvent actionEvent) {
@@ -340,7 +377,21 @@ public class Controller {
         int selectedDepartureIndex = preselectedBusesList.getSelectionModel().getSelectedIndex();
         int distanceColumn = departuresData.getColumnIndex("distance");
         int distance = departuresData.get(selectedDepartureIndex, distanceColumn);
-        priceTextField.setText(Double.toString(distance*0.9));
+        priceTextField.setText(Double.toString(distance * 0.9));
+    }
+
+    //nie dziala
+    public void onRoutesListManagementSelected(ActionEvent actionEvent) {
+        routesListManagement.getSelectionModel();
+        // int index = routesListManagement.getSelectionModel().getSelectedIndex();
+        routeIdToRemove = routeToRemove.getColumnIndex("route_id");
+    }
+
+    //nie dziala
+    public void onSeatSelected(ActionEvent actionEvent) {
+        seats = new ToggleGroup();
+        ToggleButton toggleButton;
 
     }
+
 }

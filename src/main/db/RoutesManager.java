@@ -31,7 +31,7 @@ public class RoutesManager {
                 departure, destination) > 0;
     }
 
-    public boolean removeRouteById(String id) throws SQLException {
+    public boolean removeRouteById(int id) throws SQLException {
         return manager.removeWhereColumnEquals("routes", "route_id", id) > 0;
     }
 
@@ -44,4 +44,6 @@ public class RoutesManager {
         return manager.selectWhereColumnEquals2("routes", "departure", selectedDeparture,
                 "distance", selectedDestination, "destination");
     }
+
+
 }

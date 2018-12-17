@@ -14,6 +14,7 @@ import main.LoginManager;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.sql.SQLException;
 
 public class Main extends Application {
     private static Main instance = null;
@@ -77,7 +78,7 @@ public class Main extends Application {
         if (loginManager.isLoggedIn()) {
             Pane root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
             primaryStage.setTitle("Book a Dream Bus!");
-            primaryStage.setScene(new Scene(root, 900, 600));
+            primaryStage.setScene(new Scene(root, 900, 680));
             primaryStage.show();
         }
 

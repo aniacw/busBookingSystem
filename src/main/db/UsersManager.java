@@ -24,4 +24,8 @@ public class UsersManager {
     public Data getPassword(String login) throws SQLException {
         return manager.selectWhereColumnEqualsValueFromOtherColumn("users", "login", login, "user_password");
     }
+
+    public void changePassword(String login, String newPassword ) throws SQLException {
+        manager.updateWhereColumnEqualsValueFromOtherColumn("users", "login", login, "user_password", newPassword);
+    }
 }

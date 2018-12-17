@@ -194,19 +194,36 @@ public class DataBaseManager {
         return new Data((statement.executeQuery(getData.toString())));
     }
 
-    public Data selectWhereColumnEqualsValueFromOtherColumn(String table, String column1, String searchInCol1,
+    public Data selectWhereColumnEqualsValueFromOtherColumn(String table, String column1, Object searchInCol1,
                                                             String column2) throws SQLException {
         StringBuilder getValue = new StringBuilder();
         getValue
                 .append("SELECT ")
-                .append(column2)
+                .append(column2)//pass
                 .append(" FROM ")
+                .append(table)//users
+                .append(" WHERE ")
+                .append(column1)//login
+                .append(" = ")
+                .append(objectToString(searchInCol1));//loggedUser
+        return new Data(statement.executeQuery(getValue.toString()));
+    }
+
+    public void updateWhereColumnEqualsValueFromOtherColumn(String table, String column1, String searchInCol1,
+                                                            String column2, String updateInCol2) throws SQLException {
+        StringBuilder updateValue = new StringBuilder();
+        updateValue
+                .append(" UPDATE ")
                 .append(table)
+                .append(" SET ")
+                .append(column2)
+                .append(" = ")
+                .append(objectToString(updateInCol2))
                 .append(" WHERE ")
                 .append(column1)
                 .append(" = ")
                 .append(objectToString(searchInCol1));
-        return new Data(statement.executeQuery(getValue.toString()));
+        statement.executeUpdate(updateValue.toString());
     }
 
     public Data getTable(String table) throws SQLException {
