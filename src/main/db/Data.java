@@ -25,7 +25,12 @@ public class Data implements Iterable<Data.Row> {
 
         @Override
         public String toString(){
-            return Arrays.toString(data);
+            StringBuilder builder=new StringBuilder();
+            for (Object o : data){
+                builder.append(o);
+                builder.append(" ");
+            }
+            return builder.toString();
         }
     }
 

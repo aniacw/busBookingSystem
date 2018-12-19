@@ -142,6 +142,7 @@ public class DataBaseManager {
         return statement.executeUpdate(deleteData.toString());
     }
 
+
     public Data selectWhereColumnEqualsJoinTables(String table1, String column1, String column2,
                                                   Object primaryKey, String table2,
                                                   Object selectFromColumn1, Object selectFromColumn2) throws SQLException {
@@ -174,6 +175,27 @@ public class DataBaseManager {
         return new Data((statement.executeQuery(getData.toString())));
 
     }
+
+    public Data selectFromJoinedTablesWhereColumnEquals(String table1, String table2, String column, Object value) throws SQLException {
+        StringBuilder getData = new StringBuilder();
+        getData
+                .append("SELECT * FROM ")
+                .append(table1)
+                .append(" NATURAL JOIN ")
+                .append(table2)
+                .append(" WHERE ")
+                .append(column)
+                .append(" = ")
+                .append(objectToString(value));
+        return new Data((statement.executeQuery(getData.toString())));
+
+    }
+
+
+    public Object getMaximum(String table, String column) throws SQLException {
+        return new Data(statement.executeQuery("select " + column + " from " + table + " order by " + column + " desc limit 1")).asSingleObject();
+    }
+
 
     public Data selectWhereColumnEquals2(String table, String column1, String selectedValue1, String column2,
                                          String selectedValue2, String selectedColumn) throws SQLException {

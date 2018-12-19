@@ -29,6 +29,7 @@ public class Main extends Application {
     private UsersManager usersManager;
     private RoutesManager routesManager;
     private BookingsManager bookingsManager;
+    private SeatsManager seatsManager;
 
     public BookingsManager getBookingsManager() {
         return bookingsManager;
@@ -54,6 +55,8 @@ public class Main extends Application {
         return usersManager;
     }
 
+    public SeatsManager getSeatsManager() {return seatsManager;}
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         dataBaseManager = new DataBaseManager();
@@ -62,6 +65,7 @@ public class Main extends Application {
         departuresManager = new DeparturesManager(dataBaseManager);
         usersManager = new UsersManager(dataBaseManager);
         bookingsManager = new BookingsManager(dataBaseManager);
+        seatsManager=new SeatsManager(dataBaseManager);
         instance = this;
 
         dataBaseManager.connect("busschedule", "root", "123456");

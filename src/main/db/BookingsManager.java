@@ -19,5 +19,7 @@ public class BookingsManager {
         manager.insertObjectsIntoTable("bookings", null, name, departureIdSelected, fare, userId);
     }
 
-
+    public int getLastBookingId() throws SQLException {
+        return (Integer)manager.getMaximum("bookings", "booking_id");
+    }
 }

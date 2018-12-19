@@ -3,20 +3,21 @@ package main.gui;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.StringConverter;
 import javafx.util.converter.DateTimeStringConverter;
-import main.FareCalculator;
+import main.db.BookingsManager;
 import main.db.Data;
-import main.db.DataProcessor;
+import main.db.SeatsManager;
 
-import java.lang.management.ManagementFactory;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 
 public class Controller {
 
@@ -64,6 +65,7 @@ public class Controller {
             myOrdersButton,
             changePasswordButton,
             addDepartureButton,
+            deleteRouteButton,
             createNewUserButton;
 
     @FXML
@@ -100,8 +102,13 @@ public class Controller {
             seat10C;
 
     @FXML
+    GridPane seatsContainer;
+
+    @FXML
     ListView<Object>
-            ordersHistoryList,
+            ordersHistoryList;
+    @FXML
+    ListView<Data.Row>
             routesListManagement;
 
     @FXML
@@ -116,11 +123,25 @@ public class Controller {
     private Data departuresData;
     private Data routeToRemove;
     private ToggleGroup seats;
+    private HashMap<String, ToggleButton> seatsMap;
+
+
+    private void initSeatsMap(){
+        seatsMap=new HashMap<>();
+        for (Node n : seatsContainer.getChildren()){
+            if (n instanceof ToggleButton){
+                ToggleButton b = (ToggleButton)n;
+                seatsMap.put(b.getText(), b);
+            }
+        }
+    }
 
     @FXML
     public void initialize() throws SQLException {
 
         accessTabs();
+
+        initSeatsMap();
 
         Data data = Main.getInstance().getDataBaseManager().getColumnFromTable("departure", "routes");
         for (Data.Row row : data) {
@@ -158,13 +179,13 @@ public class Controller {
 
         routeToRemove = Main.getInstance().getDataBaseManager().getTable("routes");
         for (Data.Row row : routeToRemove) {
-            String rowString = row.get(1).toString() + " " + row.get(2).toString() + " " + row.get(3).toString() + " " +
-                    row.get(4).toString() + " " + row.get(5).toString();
-            routesListManagement.getItems().add(rowString);
+           // String rowString = row.get(1).toString() + " " + row.get(2).toString() + " " + row.get(3).toString() + " " +
+            //        row.get(4).toString() + " " + row.get(5).toString();
+            routesListManagement.getItems().add(row);
         }
 
         Data data1 = Main.getInstance().getRoutesManager().getRouteId();
-        for(Data.Row row : data1) {
+        for (Data.Row row : data1) {
             int routeId = Integer.parseInt(row.get(1).toString());
             routeIdComboBox.getItems().add(routeId);
         }
@@ -175,7 +196,11 @@ public class Controller {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-    }
+
+//        seatsContainer.getChildren().addAll(seat1A, seat2A, seat3A, seat4A, seat5A, seat6A, seat7A, seat8A, seat9A,
+//                seat10A, seat1B, seat2B, seat3B, seat4B, seat5B, seat6B, seat7B, seat8B, seat9B, seat10B, seat1C,
+//                seat2C, seat3C, seat4C, seat5C, seat6C, seat7C, seat8C, seat9C, seat10C);
+}
 
     //dziala
     public void onDeparturesSelected() {
@@ -237,12 +262,15 @@ public class Controller {
         }
     }
 
-    //nie dziala
+    //dziala ale brzydko
     public void onButtonRemoveBusClicked() {
 
-        ObservableList<Object> selectedRoute = routesListManagement.getSelectionModel().getSelectedItems();
-        int id = (int) selectedRoute.get(0);
-
+        ObservableList<Data.Row> selectedRoute = routesListManagement.getSelectionModel().getSelectedItems();
+        Data.Row line = selectedRoute.get(0);
+        //String idLine = selectedRoute.get(0).toString();
+        //String[] array = idLine.split(" ");
+        //String id = array[0];
+        int id = (Integer)line.get(1);
         try {
             Main.getInstance().getRoutesManager().removeRouteById(id);
         } catch (SQLException e) {
@@ -335,6 +363,17 @@ public class Controller {
         }
     }
 
+    private void reserveSelectedSeats(int bookingId) throws SQLException {
+        SeatsManager seatsManager=Main.getInstance().getSeatsManager();
+        for (Node n : seatsContainer.getChildren()){
+            if (n instanceof ToggleButton){
+                ToggleButton b = (ToggleButton)n;
+                if (b.isSelected())
+                    seatsManager.insertSeatForBooking(bookingId, b.getText());
+            }
+        }
+    }
+
     public void onButtonBookBusClicked() {
         String name = nameTextField.getText();
 
@@ -350,13 +389,16 @@ public class Controller {
             int departudeIdColumn = departuresData.getColumnIndex("departure_id");
 
             int selectedDepartureIndex = preselectedBusesList.getSelectionModel().getSelectedIndex();
-            int departureId = departuresData.get(selectedDepartureIndex, departudeIdColumn);
+            int departureId = departuresData.get(selectedDepartureIndex+1, departudeIdColumn);
 
             double fare = Double.parseDouble(priceTextField.getText());
 
-            Main.getInstance().getBookingsManager().addOrder(name, departureId, fare,
-                    Main.getInstance().getLoginManager().getLoggedUser().getId());
+            BookingsManager bookingsManager=Main.getInstance().getBookingsManager();
 
+            bookingsManager.addOrder(name, departureId, fare,
+                    Main.getInstance().getLoginManager().getLoggedUser().getId());
+            int lastBookingId = bookingsManager.getLastBookingId();
+            reserveSelectedSeats(lastBookingId);
             statusBarReservation.setText("Reservation successfully completed!");
 
         } catch (SQLException e) {
@@ -386,20 +428,49 @@ public class Controller {
             AlertDialog.show("Incorrect password", Alert.AlertType.ERROR);
     }
 
+
+    private void lockSeat(String seat){
+        ToggleButton button = seatsMap.get(seat);
+        if (button != null){
+            button.setDisable(true);
+            //button.setStyle("-fx-background-color: C04040");
+        }
+    }
+
+
+    private void unlockAllSeats(){
+        for (Node n : seatsContainer.getChildren()){
+            if (n instanceof ToggleButton){
+                ToggleButton b = (ToggleButton)n;
+                b.setDisable(false);
+                //b.setStyle("-fx-background-color: B3CEE9");
+            }
+        }
+    }
+
+
     public void onPreselectedBusesListSelected(ActionEvent actionEvent) {
         preselectedBusesList.getSelectionModel();
         int selectedDepartureIndex = preselectedBusesList.getSelectionModel().getSelectedIndex();
+        int departudeIdColumn = departuresData.getColumnIndex("departure_id");
+        int departureId = departuresData.get(selectedDepartureIndex + 1, departudeIdColumn);
+        try {
+            Data seatsTaken = Main.getInstance().getSeatsManager().selectSeatsForDeparture(departureId);
+            unlockAllSeats();
+            int seatIdColumn = seatsTaken.getColumnIndex("seat_id");
+            for (Data.Row row : seatsTaken){
+                lockSeat(row.get(seatIdColumn).toString());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         int distanceColumn = departuresData.getColumnIndex("distance");
-        int distance = departuresData.get(selectedDepartureIndex, distanceColumn);
+        int distance = departuresData.get(selectedDepartureIndex + 1, distanceColumn);
         priceTextField.setText(Double.toString(distance * 0.9));
     }
 
 
-    //nie dziala
-    public void onSeatSelected(ActionEvent actionEvent) {
-        seats = new ToggleGroup();
-        ToggleButton toggleButton;
+    public void onSeatButtonSelected(ActionEvent actionEvent) throws SQLException {
 
     }
-
 }
