@@ -20,8 +20,8 @@ public class DataBaseManager {
                         DriverManager.getConnection(
                                 "jdbc:mysql://localhost:3306/" + database + "?user=" + login + "&password=" + password);
                 statement = connection.createStatement();
-                this.database=database;
-                this.login=login;
+                this.database = database;
+                this.login = login;
                 this.password = password;
                 return true;
             } catch (IllegalAccessException | InstantiationException | ClassNotFoundException e) {
@@ -31,9 +31,9 @@ public class DataBaseManager {
             return true;
     }
 
-    private boolean validateConnection(){
+    private boolean validateConnection() {
         try {
-            if (connection.isClosed() || statement.isClosed()){
+            if (connection.isClosed() || statement.isClosed()) {
                 connection =
                         DriverManager.getConnection(
                                 "jdbc:mysql://localhost:3306/" + database + "?user=" + login + "&password=" + password);
@@ -81,16 +81,6 @@ public class DataBaseManager {
         statement.executeUpdate(builder.toString());
     }
 
-    public void insertValuesIntoExistingTable(String tableName, String row) throws SQLException {
-        StringBuilder builder = new StringBuilder();
-        builder
-                .append("INSERT INTO ")
-                .append(tableName)
-                .append(" VALUES(")
-                .append(row)
-                .append(')');
-        statement.executeUpdate(builder.toString());
-    }
 
     public Data getColumnFromTable(String column, String table) throws SQLException {
         StringBuilder getData = new StringBuilder();
@@ -123,7 +113,7 @@ public class DataBaseManager {
                 .append(column)
                 .append(" = ")
                 .append(objectToString(value));
-       return statement.executeUpdate(deleteData.toString());
+        return statement.executeUpdate(deleteData.toString());
     }
 
     public int removeWhereTwoColumnEquals(String table, String column1, String column2, Object value1, Object value2) throws SQLException {
@@ -176,6 +166,41 @@ public class DataBaseManager {
 
     }
 
+    public Data selectWhereColumnEqualsJoinTables2(String table1, String column1, String table2, String column2,
+                                                  Object selectFromColumn1, String joinOn) throws SQLException {
+        StringBuilder getData = new StringBuilder();
+        getData
+                .append("SELECT ")
+                .append(column2)
+                .append(" FROM ")
+                .append(table1)
+                .append(" INNER JOIN ")
+                .append(table2)
+                .append(" ON ")
+                .append(table1)
+                .append(".")
+                .append(joinOn)//departure_id
+                .append(" = ")
+                .append(table2)
+                .append(".")
+                .append(joinOn)
+                .append(" WHERE ")
+                .append(table1)
+                .append(".")
+                .append(column1)
+                .append(" = ")
+                .append(objectToString(selectFromColumn1));
+        return new Data((statement.executeQuery(getData.toString())));
+    }
+
+    public Data test() throws SQLException{
+       String s = "SELECT departure_date FROM departures INNER JOIN bookings ON bookings.departure_id = departures.departure_id WHERE bookings.departure_id = 14";
+   return new Data(statement.executeQuery(s));
+
+    }
+
+    //SELECT departure_id FROM bookings INNER JOIN departures ON bookings.departure_id = departures.departure_id WHERE bookings.departure_id = x
+
     public Data selectFromJoinedTablesWhereColumnEquals(String table1, String table2, String column, Object value) throws SQLException {
         StringBuilder getData = new StringBuilder();
         getData
@@ -190,6 +215,14 @@ public class DataBaseManager {
         return new Data((statement.executeQuery(getData.toString())));
 
     }
+
+//    public Data selectMultipleRowsWhereColumnEquals(String table, String column1, String column2, Object value) throws SQLException {
+//        StringBuilder getData = new StringBuilder();
+//        getData
+//                .append("SELECT COUNT(")
+//                .append(column1)
+//                .append(")")
+//    }
 
 
     public Object getMaximum(String table, String column) throws SQLException {

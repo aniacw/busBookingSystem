@@ -24,9 +24,9 @@ public class Data implements Iterable<Data.Row> {
         }
 
         @Override
-        public String toString(){
-            StringBuilder builder=new StringBuilder();
-            for (Object o : data){
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            for (Object o : data) {
                 builder.append(o);
                 builder.append(" ");
             }
@@ -121,10 +121,10 @@ public class Data implements Iterable<Data.Row> {
     }
 
 
-    public void process(DataProcessor processor){
-        for (int r = 0; r<data.size(); ++r){
-            for (int c = 1; c <= columns; ++c){
-                processor.process(data.get(r).get(c), r+1, c);
+    public void process(DataProcessor processor) {
+        for (int r = 0; r < data.size(); ++r) {
+            for (int c = 1; c <= columns; ++c) {
+                processor.process(data.get(r).get(c), r + 1, c);
             }
         }
     }

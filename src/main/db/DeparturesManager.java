@@ -23,4 +23,14 @@ public class DeparturesManager {
                 "destination", "route_id", "departures", departure, destination);
     }
 
+    public Data getDate(int departureId) throws SQLException {
+        return manager.selectWhereColumnEqualsJoinTables2("departures", "departure_id", "bookings",
+                "departure_date", departureId, "departure_id");
+
+    }
+
+    public Data getTime(int departureId) throws SQLException {
+        return manager.selectWhereColumnEqualsJoinTables2("departures", "departure_id", "bookings",
+                "departure_time", departureId, "departure_id");
+    }
 }

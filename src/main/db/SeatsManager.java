@@ -1,7 +1,6 @@
 package main.db;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public class SeatsManager {
     private DataBaseManager manager;
@@ -10,9 +9,6 @@ public class SeatsManager {
         this.manager = manager;
     }
 
-    public Data selectSeatsForBooking(int bookingId){
-        return null;
-    }
 
     public Data selectSeatsForDeparture(int departureId) throws SQLException {
         return manager.selectFromJoinedTablesWhereColumnEquals("bookings", "seats", "departure_id", departureId);
@@ -20,5 +16,9 @@ public class SeatsManager {
 
     public void insertSeatForBooking(int bookingId, String seat) throws SQLException {
         manager.insertObjectsIntoTable("seats", bookingId, seat);
+    }
+
+    public Data getSeatsForBooking(int bookingId) throws SQLException {
+        return manager.selectWhereColumnEqualsValueFromOtherColumn("seats", "booking_id", bookingId, "seat_id");
     }
 }

@@ -85,75 +85,13 @@ public class Main extends Application {
             primaryStage.setScene(new Scene(root, 900, 680));
             primaryStage.show();
         }
-
-        // manager.insertIntoTable("routes", 1, "W", "L", 3344, 45);
-
-//
-//        Statement stmt = null;
-//        ResultSet rs = null;
-//
-//        try {
-//            stmt = connection.createStatement();
-//
-////            rs = stmt.executeQuery("SELECT * FROM routes");
-//////            while (rs.next()) {
-//////                for (int i = 1; i <= rs.getMetaData().getColumnCount(); ++i)
-//////                    System.out.println(rs.getObject(i));
-//////            }
-//
-//            stmt.executeUpdate("INSERT INTO routes(departure, destination, distance, bus_no) VALUES ('Wrocaw', 'Rzeszów', 400, 33)");
-//
-//            rs = stmt.executeQuery("SELECT * FROM routes");
-//            while (rs.next()) {
-//                for (int i = 1; i <= rs.getMetaData().getColumnCount(); ++i)
-//                    System.out.println(rs.getObject(i));
-//            }
-//                    // or alternatively, if you don't know ahead of time that
-//                    // the query will be a SELECT...
-//
-//            if (stmt.execute("SELECT foo FROM bar")) {
-//                rs = stmt.getResultSet();
-//            }
-//
-//            // Now do something with the ResultSet ....
-//        } catch (SQLException ex) {
-//            // handle any errors
-//            System.out.println("SQLException: " + ex.getMessage());
-//            System.out.println("SQLState: " + ex.getSQLState());
-//            System.out.println("VendorError: " + ex.getErrorCode());
-//        } finally {
-//            // it is a good idea to release
-//            // resources in a finally{} block
-//            // in reverse-order of their creation
-//            // if they are no-longer needed
-//
-//            if (rs != null) {
-//                try {
-//                    rs.close();
-//                } catch (SQLException sqlEx) {
-//                } // ignore
-//
-//                rs = null;
-//            }
-//
-//            if (stmt != null) {
-//                try {
-//                    stmt.close();
-//                } catch (SQLException sqlEx) {
-//                } // ignore
-//
-//                stmt = null;
-//            }
-//        }
-
-
     }
 
 
     public static void main(String[] args) {
-//        try {
+   //     try {
 //            Document document = new Document();
-//            PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\Ania\\Desktop\\iTextHelloWorld.pdf"));
+//            PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\Ania\\Desktop\\ticket.pdf"));
 //
 //            document.open();
 //            Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
